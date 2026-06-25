@@ -99,7 +99,7 @@ class Generator:
             model_used=self._settings.llm_model,
             input_tokens=input_tokens,
             output_tokens=output_tokens,
-        )
+        ) 
 
     def reset_history(self) -> None:
         """Clear conversation history (start fresh session)."""
