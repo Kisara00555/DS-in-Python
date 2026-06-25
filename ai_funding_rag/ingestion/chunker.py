@@ -82,7 +82,7 @@ class SlidingWindowChunker(BaseChunker):
                     continue  # Skip noise chunks
                 chunk_id = f"{page.source}_p{page.page_number}_{idx}"
                 chunks.append(
-                    TextChunk(
+                    TextChunk( 
                         chunk_id=chunk_id,
                         source=page.source,
                         page_number=page.page_number,
