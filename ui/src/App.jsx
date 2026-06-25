@@ -40,7 +40,7 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     pollStatus();
     fetchModelName();
     const id = setInterval(pollStatus, 8000);
