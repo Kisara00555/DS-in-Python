@@ -31,7 +31,7 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
     if (!q || loading) return;
     setInput("");
 
-    const userMsg = { role: "user", content: q, timestamp: new Date() };
+    const userMsg = { role: "user", content: q, timestamp: new Date() }; 
     setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
 
