@@ -89,7 +89,7 @@ export default function AboutPanel() {
             rel="noreferrer"
             className="btn btn-primary"
             id="btn-github-link"
-          >
+          > 
             🔗 View on GitHub
           </a>
         </div>
