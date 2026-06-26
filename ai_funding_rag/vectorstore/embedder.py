@@ -74,7 +74,7 @@ class LocalEmbedder(BaseEmbedder):
         try:
             dim = self._model.get_embedding_dimension()
         except AttributeError:
-            dim = self._model.get_sentence_embedding_dimension()
+            dim = self._model.get_sentence_embedding_dimension() 
         logger.info(
             "Local embedder ready — model '%s', dim=%d",
             model_name,
