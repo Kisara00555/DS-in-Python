@@ -28,7 +28,7 @@ export default function AboutPanel() {
         </div>
 
         {/* Module info */}
-        <div className="about-meta-row animate-fade-in-up">
+        <div className="about-meta-row animate-fade-in-up"> 
           <div className="about-meta-card glass">
             <span className="about-meta-label">Module</span>
             <span className="about-meta-value">DS205.3</span>
