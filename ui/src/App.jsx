@@ -72,7 +72,7 @@ export default function App() {
             />
           )}
           {tab === "corpus" && (
-            <CorpusPanel status={status} onRefresh={pollStatus} />
+            <CorpusPanel status={status} onRefresh={pollStatus} /> 
           )}
           {tab === "eval" && <EvalPanel status={status} />}
           {tab === "about" && <AboutPanel />}
