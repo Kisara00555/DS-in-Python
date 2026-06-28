@@ -104,7 +104,7 @@ def main() -> None:
     # ── Full evaluation mode ──────────────────────────────────────────────────
     print(f"\n🔬  Running RAG Triad evaluation on {settings.eval_dataset_path} …")
     print("    Scoring: Context Relevance | Faithfulness | Answer Relevance\n")
-
+ 
     report = evaluator.run_full_evaluation(agent, ground_truth_path=args.dataset)
 
     html_path = settings.eval_results_path.with_name("report.html")
