@@ -39,7 +39,7 @@ export default function AboutPanel() {
           </div>
           <div className="about-meta-card glass">
             <span className="about-meta-label">LLM</span>
-            <span className="about-meta-value">Llama 3.1 8B</span>
+            <span className="about-meta-value">Llama 3.1 8B</span> 
           </div>
           <div className="about-meta-card glass">
             <span className="about-meta-label">Vector DB</span>
