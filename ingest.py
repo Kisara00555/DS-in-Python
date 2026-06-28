@@ -62,7 +62,7 @@ def main() -> None:
     print(f"\n🔄  Ingesting from: {args.source}")
     count = agent.ingest(source=args.source, force=args.force)
 
-    if count > 0:
+    if count > 0: 
         print(f"✅  Successfully stored {count} chunks.")
     else:
         print(f"ℹ️   Vector store already populated ({agent.corpus_size} chunks). "
