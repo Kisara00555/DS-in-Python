@@ -1,7 +1,7 @@
 """
 ingest.py
 ---------
-CLI script to ingest PDFs into the vector store.
+CLI script to ingest PDFs into the vector store. 
 
 Usage:
     python ingest.py --source ./data/pdfs
