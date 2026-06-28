@@ -16,7 +16,7 @@ export default function AboutPanel() {
         {/* Project description */}
         <div className="about-card glass animate-fade-in-up">
           <div className="about-card-icon">🚀</div>
-          <div>
+          <div> 
             <h3>AI Startup Funding &amp; Investment Intelligence Assistant</h3>
             <p className="about-description">
               A production-grade <strong>Retrieval-Augmented Generation (RAG)</strong> system
