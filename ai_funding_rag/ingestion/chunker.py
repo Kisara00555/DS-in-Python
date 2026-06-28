@@ -5,7 +5,7 @@ Splits raw document pages into overlapping text chunks.
 Implements a BaseChunker ABC so chunking strategies are interchangeable.
 """
 
-from __future__ import annotations
+from __future__ import annotations 
 
 import re
 from abc import ABC, abstractmethod
