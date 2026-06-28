@@ -121,7 +121,7 @@ def main() -> None:
     print(f"  Pass Rate (≥0.75)    : {report.pass_rate:.2%}")
     print("=" * 72)
     print(f"\n  📄  JSON  → {settings.eval_results_path}")
-    print(f"  🌐  HTML  → {html_path}")
+    print(f"  🌐  HTML  → {html_path}") 
     print()
 
     # Per-question table
