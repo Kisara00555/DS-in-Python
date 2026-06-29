@@ -45,7 +45,7 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
         role: "assistant",
         content: data.answer,
         timestamp: new Date(),
-        meta: {
+        meta: { 
           model: data.model,
           inputTokens: data.input_tokens,
           outputTokens: data.output_tokens,
