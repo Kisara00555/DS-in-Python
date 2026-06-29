@@ -7,7 +7,7 @@ Uses dependency injection: every component receives a Settings instance.
 Embedding strategy:
   - Default: LocalEmbedder (sentence-transformers) — no API key needed, offline.
 """
-
+ 
 from __future__ import annotations
 
 import os
