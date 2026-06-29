@@ -36,7 +36,7 @@ export default function AboutPanel() {
           <div className="about-meta-card glass">
             <span className="about-meta-label">System</span>
             <span className="about-meta-value">RAG + LLM-as-Judge</span>
-          </div>
+          </div> 
           <div className="about-meta-card glass">
             <span className="about-meta-label">LLM</span>
             <span className="about-meta-value">Llama 3.1 8B</span> 
