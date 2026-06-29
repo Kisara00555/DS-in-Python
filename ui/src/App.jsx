@@ -49,7 +49,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      {/* Ambient background orbs */}
+      {/* Ambient background orbs */} 
       <div className="ambient">
         <div className="orb orb-1" />
         <div className="orb orb-2" />
