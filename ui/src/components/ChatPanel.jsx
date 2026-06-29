@@ -80,7 +80,7 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
       await api.resetConversation();
       setMessages([
         {
-          role: "assistant",
+          role: "assistant", 
           content: "🔄 Conversation history cleared. Ask me anything!",
           timestamp: new Date(),
         },
