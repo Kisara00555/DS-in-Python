@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 # ── Constants ─────────────────────────────────────────────────────────────────
 
 # Default local model — lightweight, high-quality, runs on CPU
-_LOCAL_MODEL_DEFAULT = "all-MiniLM-L6-v2"
+_LOCAL_MODEL_DEFAULT = "all-MiniLM-L6-v2" 
 
 # ── Abstract interface ────────────────────────────────────────────────────────
 
