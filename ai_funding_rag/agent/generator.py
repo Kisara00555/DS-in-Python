@@ -34,7 +34,7 @@ class GenerationResult:
     output_tokens: int
 
 
-class Generator:
+class Generator: 
     """
     Wraps the Groq client to produce grounded answers.
     Maintains a conversation history for multi-turn interactions.
