@@ -19,7 +19,7 @@ export default function AboutPanel() {
           <div> 
             <h3>AI Startup Funding &amp; Investment Intelligence Assistant</h3>
             <p className="about-description">
-              A production-grade <strong>Retrieval-Augmented Generation (RAG)</strong> system
+              A production-grade <strong>Retrieval-Augmented Generation (RAG)</strong> system 
               that lets you query a private corpus of AI startup funding and venture capital
               documents using natural language. Built for <strong>DS205.3 – Data Science with
               Python</strong> coursework.
