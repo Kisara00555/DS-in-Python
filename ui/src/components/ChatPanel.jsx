@@ -148,7 +148,7 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
               <input
                 type="checkbox"
                 checked={showTrace}
-                onChange={(e) => setShowTrace(e.target.checked)}
+                onChange={(e) => setShowTrace(e.target.checked)} 
                 id="toggle-trace"
               />
               <span>Show retrieval trace</span>
