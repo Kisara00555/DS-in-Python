@@ -88,7 +88,7 @@ class LocalEmbedder(BaseEmbedder):
         logger.info("Embedding %d texts locally …", len(texts))
         vectors = self._model.encode(
             texts,
-            show_progress_bar=len(texts) > 50,
+            show_progress_bar=len(texts) > 50, 
             convert_to_numpy=True,
             batch_size=64,
         )
