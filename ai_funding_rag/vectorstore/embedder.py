@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 # Default local model — lightweight, high-quality, runs on CPU
 _LOCAL_MODEL_DEFAULT = "all-MiniLM-L6-v2" 
 
-# ── Abstract interface ────────────────────────────────────────────────────────
+# ── Abstract interface ──────────────────────────────────────────────────────── 
 
 class BaseEmbedder(ABC):
     """Abstract embedder interface — all embedders must implement this."""
