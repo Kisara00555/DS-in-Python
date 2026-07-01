@@ -147,7 +147,7 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
             <label className="toolbar-toggle">
               <input
                 type="checkbox"
-                checked={showTrace}
+                checked={showTrace} 
                 onChange={(e) => setShowTrace(e.target.checked)} 
                 id="toggle-trace"
               />
