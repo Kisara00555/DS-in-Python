@@ -79,7 +79,7 @@ class Settings:
     def validate(self) -> None:
         """Raise if critical fields are missing."""
         # GROQ_API_KEY is required for the LLM.
-        if not self.groq_api_key:
+        if not self.groq_api_key: 
             raise EnvironmentError(
                 "GROQ_API_KEY is not set. "
                 "Get a free key at https://console.groq.com/keys "
