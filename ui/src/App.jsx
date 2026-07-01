@@ -64,7 +64,7 @@ export default function App() {
         <div className="panel-container">
           {tab === "chat" && (
             <ChatPanel
-              messages={messages}
+              messages={messages} 
               setMessages={setMessages}
               loading={loading}
               setLoading={setLoading}
