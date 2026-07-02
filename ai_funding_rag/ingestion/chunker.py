@@ -20,7 +20,7 @@ MIN_CHUNK_LENGTH = 50  # Characters — shorter chunks are noise
 @dataclass
 class TextChunk:
     """Value object representing a single text chunk ready for embedding."""
-
+ 
     chunk_id: str           # Unique ID: "{source}_p{page}_{idx}"
     source: str
     page_number: int
