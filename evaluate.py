@@ -139,7 +139,7 @@ def main() -> None:
     print()
 
     # Best and worst
-    print("🏆  Best Questions:")
+    print("🏆  Best Questions:") 
     for r in report.best_questions():
         print(f"    [{r.question_id}] {r.question[:70]}  → {r.rag_score:.2f}")
     print("\n⚠️   Worst Questions:")
