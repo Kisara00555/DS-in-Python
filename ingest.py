@@ -53,7 +53,7 @@ def main() -> None:
 
     settings = default_settings
     settings.validate()
-
+ 
     if not args.source.exists():
         logger.error("Source path does not exist: %s", args.source)
         sys.exit(1)
