@@ -33,7 +33,7 @@ logger = logging.getLogger("ingest")
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Ingest PDFs into the AI Funding RAG vector store."
-    )
+    ) 
     parser.add_argument(
         "--source",
         type=Path,
