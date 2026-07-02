@@ -1,6 +1,6 @@
 """
 vectorstore/embedder.py
------------------------
+----------------------- 
 Wraps the embedding backend behind an ABC so the embedding model
 can be swapped without touching retrieval logic.
 
