@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class GenerationResult:
-    """Full result including the answer and the trace."""
+    """Full result including the answer and the trace.""" 
 
     question: str
     answer: str
