@@ -68,7 +68,7 @@ def main() -> None:
         print(f"ℹ️   Vector store already populated ({agent.corpus_size} chunks). "
               f"Use --force to re-ingest.")
     print(f"📦  Total corpus size: {agent.corpus_size} chunks\n")
-
+ 
 
 if __name__ == "__main__":
     main()
