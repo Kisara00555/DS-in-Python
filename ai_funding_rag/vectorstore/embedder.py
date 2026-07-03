@@ -56,7 +56,7 @@ class LocalEmbedder(BaseEmbedder):
       - Runs fully offline — zero API calls, zero rate limits
 
     The model is downloaded once on first use and cached locally by
-    sentence-transformers in ~/.cache/huggingface/hub/.
+    sentence-transformers in ~/.cache/huggingface/hub/. 
     """
 
     def __init__(self, settings: Settings) -> None:
