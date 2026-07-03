@@ -45,7 +45,7 @@ export default function App() {
     fetchModelName();
     const id = setInterval(pollStatus, 8000);
     return () => clearInterval(id);
-  }, []);
+  }, []); 
 
   return (
     <div className="app-shell">
