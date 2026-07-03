@@ -73,7 +73,7 @@ class Settings:
     eval_results_path: Path = field(
         default_factory=lambda: Path(
             os.getenv("EVAL_RESULTS_PATH", "./data/evaluation/results.json")
-        )
+        ) 
     )
 
     def validate(self) -> None:
