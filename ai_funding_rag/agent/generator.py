@@ -55,7 +55,7 @@ class Generator:
         ]
 
     # ── public ───────────────────────────────────────────────────────────────
-
+ 
     def generate(self, trace: RetrievalTrace) -> GenerationResult:
         """Generate a grounded answer from the retrieval trace."""
         user_content = RAG_PROMPT_TEMPLATE.format(
