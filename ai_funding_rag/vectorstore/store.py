@@ -66,7 +66,7 @@ class BaseVectorStore(ABC):
 # ── Concrete implementation ────────────────────────────────────────────────
 
 class ChromaVectorStore(BaseVectorStore):
-    """
+    """ 
     Persistent ChromaDB vector store.
 
     ChromaDB stores embeddings on disk at `settings.vector_store_path`,
