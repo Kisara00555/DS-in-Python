@@ -1,0 +1,26 @@
+# ── Core LLM / Gemini SDK ───────────────────────────────────────────────────────
+# New unified Google Gen AI SDK (provides `from google import genai`)
+google-genai>=1.0.0
+
+# ── Local Embeddings (sentence-transformers) ───────────────────────────────────
+# Model: all-MiniLM-L6-v2 — 384-dim, offline, no API quota
+sentence-transformers>=3.0.0
+# PyTorch CPU-only (avoids pulling in CUDA packages on machines without a GPU)
+torch>=2.0.0
+
+# ── PDF Extraction ────────────────────────────────────────────
+PyMuPDF>=1.24.0
+
+# ── Vector Store ──────────────────────────────────────────────
+chromadb>=0.5.0
+
+# ── HTTP (used by legacy GeminiEmbedder) ──────────────────────
+requests>=2.31.0
+
+# ── Environment / Config ──────────────────────────────────────
+python-dotenv>=1.0.0
+
+# ── Web API (FastAPI backend for the React UI) ────────────────
+fastapi>=0.110.0
+uvicorn>=0.29.0
+python-multipart>=0.0.9

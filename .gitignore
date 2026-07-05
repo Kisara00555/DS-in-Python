@@ -1,0 +1,25 @@
+# Environment
+.env
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Vector store (large binary files — regenerate with ingest.py)
+data/vector_store/
+
+# Evaluation results (auto-generated)
+data/evaluation/results.json
+
+# IDE
+.vscode/
+.idea/
+*.suo
+
+# OS
+.DS_Store
+Thumbs.db
