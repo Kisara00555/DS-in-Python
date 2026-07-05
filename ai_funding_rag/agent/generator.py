@@ -42,7 +42,7 @@ class Generator:
 
     def __init__(self, settings: Settings) -> None:
         """
-        Initialise the Generator with a Groq client and empty history.
+        Initialise the Generator with a Groq client and empty history. 
 
         Args:
             settings: Configuration object supplying the API key, model name,
