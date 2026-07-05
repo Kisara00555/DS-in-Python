@@ -1,0 +1,132 @@
+/* TracePanel.css */
+.trace-panel {
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  background: rgba(8, 11, 20, 0.8);
+}
+
+.trace-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  text-align: left;
+  transition: var(--transition);
+}
+.trace-toggle:hover { background: rgba(6,182,212,0.06); }
+
+.trace-toggle-icon { font-size: 14px; }
+.trace-toggle-chevron { margin-left: auto; font-size: 10px; }
+
+.trace-body {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 12px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.trace-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ── Query expansion ──────────────────────────────────────────────────────── */
+.trace-query-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.trace-query {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.trace-query.original { color: var(--text-primary); }
+
+/* ── Chunk cards ──────────────────────────────────────────────────────────── */
+.chunk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chunk-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.chunk-card:hover { border-color: rgba(59,130,246,0.3); background: var(--bg-card-hover); }
+.chunk-card.expanded { border-color: rgba(59,130,246,0.4); }
+
+.chunk-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.chunk-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chunk-source {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chunk-sim {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sim-bar {
+  width: 80px;
+  height: 4px;
+  background: var(--bg-input);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.sim-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+  border-radius: 99px;
+  transition: width 0.5s ease;
+}
+
+.sim-score { font-size: 11px; color: var(--text-secondary); }
+
+.chunk-preview {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
