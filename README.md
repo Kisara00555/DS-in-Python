@@ -228,3 +228,12 @@ Run: `python evaluate.py`
 ## 👥 Authors
 
 DS205.3 Group – Faculty of Computing
+
+
+## AI Usage Disclosure
+In accordance with coursework guidelines, we acknowledge the use of AI (Google Gemini) during this project as a pair-programming assistant.
+- **Code Generation:** AI was used to assist with boilerplate React component generation and regex parsing.
+- **Debugging:** Used for troubleshooting dependency conflicts in \PyMuPDF\ and \ChromaDB\.
+- **Architectural Planning:** AI assisted in brainstorming the RAG Triad evaluation strategy.
+All core logic, integration, and final code reviews were manually conducted by the team.
+
