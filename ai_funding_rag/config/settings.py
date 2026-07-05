@@ -65,7 +65,7 @@ class Settings:
     data_dir: Path = field(
         default_factory=lambda: Path(os.getenv("DATA_DIR", "./data/pdfs"))
     )
-    eval_dataset_path: Path = field(
+    eval_dataset_path: Path = field( 
         default_factory=lambda: Path(
             os.getenv("EVAL_DATASET_PATH", "./data/evaluation/ground_truth.json")
         )
