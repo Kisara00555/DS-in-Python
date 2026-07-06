@@ -72,7 +72,7 @@ class Generator:
             model=self._settings.llm_model,
             messages=messages,
             temperature=self._settings.llm_temperature,
-        )
+        ) 
 
         answer = response.choices[0].message.content or ""
         input_tokens = response.usage.prompt_tokens if response.usage else 0 
