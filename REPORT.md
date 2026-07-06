@@ -140,4 +140,15 @@ While the current system successfully achieves its primary objectives, there are
    While local `ChromaDB` is excellent for coursework, an enterprise deployment would require swapping the local instance for a cloud-managed vector database like Pinecone or Weaviate to handle gigabytes of data with high concurrency. Additionally, the local `all-MiniLM-L6-v2` model is a general-purpose embedder. Fine-tuning a smaller embedding model specifically on financial and venture capital terminology (e.g., terms like "liquidation preference", "ratchets", "SAFE") would drastically improve Context Relevance scores.
 
 ---
+
+## VII. Bibliography
+
+1. **PwC.** (2025). *Global Business Ecosystems 2030: Market Size and Trajectory.* PricewaterhouseCoopers.
+2. **KPMG.** (2026). *Venture Pulse: Global Analysis of Venture Funding.* KPMG Enterprise.
+3. *[Insert your 3rd PDF Title here]*
+4. *[Insert your 4th PDF Title here]*
+
+*(Note: Add your YouTube Demo Video link here: [TODO: YouTube Link])*
+
+---
 *End of Report*
