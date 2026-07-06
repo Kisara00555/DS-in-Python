@@ -22,6 +22,10 @@ import logging
 import sys
 from pathlib import Path
 
+# Fix for Windows terminal emoji printing
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
