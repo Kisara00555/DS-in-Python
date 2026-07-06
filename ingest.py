@@ -41,7 +41,7 @@ def main() -> None:
         help="Path to a PDF file or directory of PDFs (default: ./data/pdfs)",
     )
     parser.add_argument(
-        "--force",
+        "--force", 
         action="store_true",
         help="Force re-ingestion even if vector store already has data",
     )
