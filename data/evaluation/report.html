@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Triad Evaluation Report – AI Funding Assistant</title>
+  <style>
+    :root {
+      --bg: #0f172a; --surface: #1e293b; --border: #334155;
+      --text: #e2e8f0; --muted: #94a3b8; --accent: #6366f1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg); color: var(--text); padding: 2rem; }
+    h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
+    .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
+
+    /* Summary cards */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr));
+              gap: 1rem; margin-bottom: 2.5rem; }
+    .card { background: var(--surface); border: 1px solid var(--border);
+             border-radius: 12px; padding: 1.25rem; text-align: center; }
+    .card-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: .06em;
+                   color: var(--muted); margin-bottom: 0.5rem; }
+    .card-value { font-size: 2rem; font-weight: 700; }
+    .card-value.green { color: #22c55e; }
+    .card-value.amber { color: #f59e0b; }
+    .card-value.red   { color: #ef4444; }
+
+    /* Legend */
+    .legend { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; font-size: 0.82rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* Table */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: var(--surface);
+             border-radius: 12px; overflow: hidden; }
+    thead { background: #273548; }
+    th { padding: 0.85rem 1rem; text-align: left; font-size: 0.78rem;
+          text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    td { padding: 0.85rem 1rem; border-top: 1px solid var(--border);
+          vertical-align: top; font-size: 0.88rem; }
+    tr:hover td { background: rgba(99,102,241,.06); }
+    .qid { font-weight: 700; color: var(--accent); white-space: nowrap; }
+    .question { max-width: 280px; }
+    .score { text-align: center; white-space: nowrap; }
+    .reasoning { color: var(--muted); font-size: 0.8rem; max-width: 260px; }
+
+    /* Triad explanation */
+    .triad { background: var(--surface); border: 1px solid var(--border);
+              border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem; }
+    .triad h2 { font-size: 1rem; margin-bottom: 1rem; color: var(--accent); }
+    .triad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .triad-item { background: #273548; border-radius: 8px; padding: 1rem; }
+    .triad-item h3 { font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .triad-item p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    footer { margin-top: 2rem; text-align: center; font-size: 0.8rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <h1>🔬 RAG Triad Evaluation Report</h1>
+  <div class="subtitle">AI Startup Funding &amp; Investment Intelligence Assistant — DS205.3</div>
+  <div class="meta">Evaluated: 2026-07-06T21:06:36 &nbsp;|&nbsp; Questions: 15</div>
+
+  <!-- Summary Cards -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-label">Avg RAG Score</div>
+      <div class="card-value green">91%</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Context Relevance</div>
+      <div class="card-value green">91%</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Faithfulness</div>
+      <div class="card-value green">95%</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Answer Relevance</div>
+      <div class="card-value green">89%</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total Questions</div>
+      <div class="card-value" style="color:var(--accent)">15</div>
+    </div>
+  </div>
+
+  <!-- RAG Triad Explanation -->
+  <div class="triad">
+    <h2>📐 The RAG Triad (TruEra Framework)</h2>
+    <div class="triad-grid">
+      <div class="triad-item">
+        <h3>1. Context Relevance</h3>
+        <p>Are the retrieved chunks actually relevant to the user's question? Detects retrieval failures and poor embedding quality.</p>
+      </div>
+      <div class="triad-item">
+        <h3>2. Faithfulness</h3>
+        <p>Is the generated answer grounded in the retrieved context? Detects hallucination — claims not supported by the source documents.</p>
+      </div>
+      <div class="triad-item">
+        <h3>3. Answer Relevance</h3>
+        <p>Does the answer directly address the question asked? Detects off-topic or evasive responses even when context was good.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="dot" style="background:#22c55e"></div> ≥ 80% Good</div>
+    <div class="legend-item"><div class="dot" style="background:#f59e0b"></div> 60–79% Acceptable</div>
+    <div class="legend-item"><div class="dot" style="background:#ef4444"></div> &lt; 60% Needs Improvement</div>
+  </div>
+
+  <!-- Results Table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Question</th>
+          <th>Context Rel.</th>
+          <th>Faithfulness</th>
+          <th>Ans. Rel.</th>
+          <th>RAG Score</th>
+          <th>Judge Reasoning</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+            <tr>
+              <td class="qid">Q01</td>
+              <td class="question">What is venture capital and how does it differ from angel investing?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">96%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q02</td>
+              <td class="question">What are the typical stages of startup funding rounds?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">89%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q03</td>
+              <td class="question">How do VCs calculate startup valuation and what is a cap table?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">86%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q04</td>
+              <td class="question">What sectors attracted the most AI startup investment in 2023-2024?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">89%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q05</td>
+              <td class="question">What is a term sheet and what are its key components?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">96%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q06</td>
+              <td class="question">What is a SAFE note and how is it used in early-stage funding?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q07</td>
+              <td class="question">What factors do venture capitalists look for when evaluating an AI startup?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">93%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q08</td>
+              <td class="question">What is the difference between pre-money and post-money valuation?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">89%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q09</td>
+              <td class="question">What are liquidation preferences and why do investors require them?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">93%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q10</td>
+              <td class="question">What is a down round and what are its consequences for a startup?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">93%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q11</td>
+              <td class="question">What is the role of a Lead Investor in a funding round?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">89%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q12</td>
+              <td class="question">How does equity dilution work across multiple funding rounds?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">92%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q13</td>
+              <td class="question">What is the Y Combinator accelerator and what startups has it funded?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">86%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q14</td>
+              <td class="question">What is a unicorn company and how many AI unicorns exist?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">86%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q15</td>
+              <td class="question">What are the main exit strategies for VC-backed startups?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">89%</span></td>
+              <td class="reasoning">The context provided sufficient information to accurately and faithfully answer the question.</td>
+            </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    DS205.3 – Data Science with Python &nbsp;|&nbsp; LLM-as-Judge evaluation via Google Gemini &nbsp;|&nbsp; RAG Triad methodology
+  </footer>
+</body>
+</html>
