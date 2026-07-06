@@ -48,7 +48,7 @@ def main() -> None:
         "--output",
         type=Path,
         default=None,
-        help="Output path for evaluation results JSON (default: from settings)",
+        help="Output path for evaluation results JSON (default: from settings)", 
     )
     parser.add_argument(
         "--question",
