@@ -47,6 +47,17 @@ class RAGAgent:
         vector_store: Optional[BaseVectorStore] = None,
         use_query_expansion: bool = True,
     ) -> None:
+        """
+        Initialise the RAGAgent with all pipeline components.
+
+        Args:
+            settings:            Configuration object (API keys, paths, model names).
+            loader:              PDF loader; defaults to PyMuPDFLoader.
+            chunker:             Text chunker; defaults to SlidingWindowChunker.
+            embedder:            Embedding model; defaults to LocalEmbedder.
+            vector_store:        Vector DB; defaults to ChromaVectorStore.
+            use_query_expansion: If True, the Retriever expands the query using LLM.
+        """
         self._settings = settings
 
         # Dependency injection with sensible defaults
@@ -147,6 +158,12 @@ class RAGAgent:
     def corpus_size(self) -> int:
         """Number of chunks currently in the vector store."""
         return self._vector_store.count()
+
+    @property
+    def history_length(self) -> int:
+        """Number of conversation turns stored in the generator's history."""
+        # Each turn = 2 messages (user + model), so divide by 2
+        return len(self._generator._history) // 2
 
     @staticmethod
     def _print_trace(trace: RetrievalTrace) -> None:

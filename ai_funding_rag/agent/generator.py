@@ -40,6 +40,13 @@ class Generator:
     """
 
     def __init__(self, settings: Settings) -> None:
+        """
+        Initialise the Generator with a Gemini client and empty history.
+
+        Args:
+            settings: Configuration object supplying the API key, model name,
+                      and temperature for the generative model.
+        """
         self._settings = settings
         self._client = genai.Client(api_key=settings.google_api_key)
         self._gen_config = genai_types.GenerateContentConfig(

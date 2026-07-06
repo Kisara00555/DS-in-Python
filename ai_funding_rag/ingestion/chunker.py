@@ -14,6 +14,8 @@ from typing import List
 
 from .pdf_loader import DocumentPage
 
+MIN_CHUNK_LENGTH = 50  # Characters — shorter chunks are noise
+
 
 @dataclass
 class TextChunk:
@@ -45,16 +47,39 @@ class SlidingWindowChunker(BaseChunker):
     """
 
     def __init__(self, chunk_size: int = 800, chunk_overlap: int = 150) -> None:
+        """
+        Initialise the chunker with sliding window parameters.
+
+        Args:
+            chunk_size:    Maximum character length of each chunk.
+            chunk_overlap: Number of characters to overlap between consecutive chunks
+                           to preserve cross-boundary context.
+        """
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
 
     # ── public ───────────────────────────────────────────────────────────────
 
     def chunk(self, pages: List[DocumentPage]) -> List[TextChunk]:
+        """
+        Split a list of document pages into overlapping TextChunks.
+
+        Chunks shorter than MIN_CHUNK_LENGTH (50 chars) are discarded to
+        avoid storing noisy fragments such as headers or stray punctuation.
+
+        Args:
+            pages: List of DocumentPage objects from the loader.
+
+        Returns:
+            Flat list of TextChunk objects ordered by source and page.
+        """
         chunks: List[TextChunk] = []
         for page in pages:
             page_chunks = self._split_text(page.raw_text)
-            for idx, text in enumerate(page_chunks):
+            idx = 0
+            for text in page_chunks:
+                if len(text) < MIN_CHUNK_LENGTH:
+                    continue  # Skip noise chunks
                 chunk_id = f"{page.source}_p{page.page_number}_{idx}"
                 chunks.append(
                     TextChunk(
@@ -69,7 +94,27 @@ class SlidingWindowChunker(BaseChunker):
                         },
                     )
                 )
+                idx += 1
         return chunks
+
+    def chunk_count(self, pages: List[DocumentPage]) -> int:
+        """
+        Preview the total number of chunks that would be produced without storing them.
+
+        Useful for estimating ingestion cost before committing.
+
+        Args:
+            pages: List of DocumentPage objects from the loader.
+
+        Returns:
+            Integer count of chunks that would be created (after noise filtering).
+        """
+        count = 0
+        for page in pages:
+            for text in self._split_text(page.raw_text):
+                if len(text) >= MIN_CHUNK_LENGTH:
+                    count += 1
+        return count
 
     # ── private ──────────────────────────────────────────────────────────────
 

@@ -27,6 +27,14 @@ class DocumentPage:
     raw_text: str
     metadata: dict       # Extensible metadata bag
 
+    def __repr__(self) -> str:
+        """Human-readable representation showing key identifiers and size."""
+        return (
+            f"DocumentPage(source={self.source!r}, "
+            f"page={self.page_number}, "
+            f"char_count={len(self.raw_text)})"
+        )
+
 
 class BaseLoader(ABC):
     """Abstract base class for document loaders."""
@@ -58,19 +66,54 @@ class PyMuPDFLoader(BaseLoader):
     """
 
     def __init__(self, extract_images: bool = False) -> None:
+        """
+        Initialise the loader.
+
+        Args:
+            extract_images: Reserved for future image extraction support.
+                            Currently unused but kept for API compatibility.
+        """
         self._extract_images = extract_images
 
     def load(self, path: Path) -> List[DocumentPage]:
+        """
+        Load a PDF file and return one DocumentPage per page.
+
+        Args:
+            path: Absolute or relative path to a PDF file.
+
+        Returns:
+            List of DocumentPage objects, one per page.
+
+        Raises:
+            ValueError: If the PDF contains zero pages.
+        """
         pages: List[DocumentPage] = []
         try:
             doc = fitz.open(str(path))
+
+            if len(doc) == 0:
+                raise ValueError(
+                    f"PDF '{path.name}' contains 0 pages and cannot be ingested. "
+                    "Verify the file is a valid, non-empty PDF."
+                )
+
+            logger.info("Opened '%s' — %d pages", path.name, len(doc))
+
             for page_idx, page in enumerate(doc):
                 text = page.get_text("text")          # plain text
                 if not text.strip():
                     # Fallback to blocks for scanned PDFs
+                    logger.info(
+                        "Page %d of '%s' is empty — falling back to block mode",
+                        page_idx + 1, path.name,
+                    )
                     text = " ".join(
                         b[4] for b in page.get_text("blocks") if isinstance(b[4], str)
                     )
+                else:
+                    logger.debug("Loaded page %d of '%s'", page_idx + 1, path.name)
+
                 metadata = {
                     "source_path": str(path),
                     "filename": path.name,
@@ -88,9 +131,17 @@ class PyMuPDFLoader(BaseLoader):
                     )
                 )
             doc.close()
+        except ValueError:
+            raise
         except Exception as exc:
             logger.error("Failed to load %s: %s", path, exc)
         return pages
 
     def supported_extensions(self) -> List[str]:
+        """
+        Return the file extensions handled by this loader.
+
+        Returns:
+            List containing '.pdf'.
+        """
         return [".pdf"]

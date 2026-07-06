@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import ChatPanel from "./components/ChatPanel";
 import CorpusPanel from "./components/CorpusPanel";
 import EvalPanel from "./components/EvalPanel";
+import AboutPanel from "./components/AboutPanel";
 import StatusBar from "./components/StatusBar";
 import "./App.css";
 
@@ -74,6 +75,7 @@ export default function App() {
             <CorpusPanel status={status} onRefresh={pollStatus} />
           )}
           {tab === "eval" && <EvalPanel status={status} />}
+          {tab === "about" && <AboutPanel />}
         </div>
       </main>
     </div>

@@ -130,6 +130,16 @@ def root():
     return {"message": "AI Startup Funding RAG API is running ✅"}
 
 
+@app.get("/health", response_model=dict)
+def health():
+    """Health check endpoint — returns service status, version, and active model."""
+    return {
+        "status": "ok",
+        "version": "1.0.0",
+        "model": default_settings.llm_model,
+    }
+
+
 @app.get("/status", response_model=StatusResponse)
 def get_status():
     """Check if the system is ready."""

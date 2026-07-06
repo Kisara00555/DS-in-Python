@@ -92,6 +92,12 @@ class EvaluationReport:
     evaluated_at: str = field(default_factory=lambda: datetime.now().isoformat(timespec="seconds"))
 
     def to_dict(self) -> dict:
+        """
+        Serialise the report to a JSON-compatible dictionary.
+
+        Returns:
+            Dict with 'evaluated_at', 'summary' aggregates, and 'records' list.
+        """
         return {
             "evaluated_at": self.evaluated_at,
             "summary": {
@@ -100,6 +106,7 @@ class EvaluationReport:
                 "avg_faithfulness": round(self.avg_faithfulness, 4),
                 "avg_answer_relevance": round(self.avg_answer_relevance, 4),
                 "avg_rag_score": round(self.avg_rag_score, 4),
+                "pass_rate": round(self.pass_rate, 4),
             },
             "records": [
                 {
@@ -117,6 +124,43 @@ class EvaluationReport:
                 for r in self.records
             ],
         }
+
+    @property
+    def pass_rate(self) -> float:
+        """
+        Percentage of questions where rag_score >= 0.75 (passing threshold).
+
+        Returns:
+            Float in [0.0, 1.0] representing the fraction of passing questions.
+        """
+        if not self.records:
+            return 0.0
+        passing = sum(1 for r in self.records if r.rag_score >= 0.75)
+        return passing / len(self.records)
+
+    def worst_questions(self, n: int = 3) -> list:
+        """
+        Return the n records with the lowest RAG Score.
+
+        Args:
+            n: Number of records to return (default 3).
+
+        Returns:
+            List of EvaluationRecord sorted ascending by rag_score.
+        """
+        return sorted(self.records, key=lambda r: r.rag_score)[:n]
+
+    def best_questions(self, n: int = 3) -> list:
+        """
+        Return the n records with the highest RAG Score.
+
+        Args:
+            n: Number of records to return (default 3).
+
+        Returns:
+            List of EvaluationRecord sorted descending by rag_score.
+        """
+        return sorted(self.records, key=lambda r: r.rag_score, reverse=True)[:n]
 
     def generate_html_report(self, output_path: Path) -> None:
         """Write a styled, self-contained HTML evaluation report to disk."""
@@ -335,6 +379,11 @@ Score each dimension on a scale of 0.0 to 1.0:
    - 0.5 = partially answers the question
    - 0.0 = answer is off-topic or refuses to answer
 
+4. FACTUAL GROUNDING CHECK:
+   Verify that every factual claim made in the system answer (names, figures,
+   dates, percentages) is explicitly present in the retrieved context.
+   Any claim NOT found in the context should reduce the faithfulness_score.
+
 Respond ONLY with this exact JSON (no markdown, no extra text):
 {{
   "context_relevance_score": <float 0.0-1.0>,
@@ -356,6 +405,13 @@ class Evaluator:
     """
 
     def __init__(self, settings: Settings) -> None:
+        """
+        Initialise the Evaluator with a Gemini judge client.
+
+        Args:
+            settings: Configuration object providing the API key and model name
+                      used by the LLM judge.
+        """
         self._settings = settings
         self._client = genai.Client(api_key=settings.google_api_key)
         self._gen_config = genai_types.GenerateContentConfig(temperature=0.0)

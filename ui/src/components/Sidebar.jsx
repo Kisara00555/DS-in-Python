@@ -4,6 +4,7 @@ const NAV_ITEMS = [
   { id: "chat",   icon: "💬", label: "Chat" },
   { id: "corpus", icon: "📚", label: "Corpus Manager" },
   { id: "eval",   icon: "📊", label: "Evaluation" },
+  { id: "about",  icon: "ℹ️", label: "About" },
 ];
 
 function getSystemStatus(status) {

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./MessageBubble.css";
 
 function formatTime(date) {
@@ -16,6 +17,31 @@ function renderContent(text) {
     line = line.replace(/\[Source:([^\]]+)\]/g, '<span class="citation">[Source:$1]</span>');
     return <p key={i} dangerouslySetInnerHTML={{ __html: line || "&nbsp;" }} />;
   });
+}
+
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard not available in non-secure context
+    }
+  };
+
+  return (
+    <button
+      id="btn-copy-answer"
+      className={`copy-btn ${copied ? "copied" : ""}`}
+      onClick={handleCopy}
+      title="Copy answer to clipboard"
+    >
+      {copied ? "✅ Copied" : "📋 Copy"}
+    </button>
+  );
 }
 
 export default function MessageBubble({ message }) {
@@ -57,12 +83,16 @@ export default function MessageBubble({ message }) {
               {meta.inputTokens}↑ / {meta.outputTokens}↓ tokens
             </span>
             <span className="bubble-time">{formatTime(timestamp)}</span>
+            <CopyButton text={content} />
           </div>
         )}
         {!meta && (
-          <span className="bubble-time" style={{ marginTop: 8, display: "block" }}>
-            {formatTime(timestamp)}
-          </span>
+          <div className="bubble-meta">
+            <span className="bubble-time" style={{ marginTop: 8, display: "block" }}>
+              {formatTime(timestamp)}
+            </span>
+            <CopyButton text={content} />
+          </div>
         )}
       </div>
     </div>

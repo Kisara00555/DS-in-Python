@@ -51,19 +51,38 @@ export default function EvalPanel({ status }) {
           </div>
         </div>
 
-        <button
-          id="btn-run-eval"
-          className="btn btn-primary"
-          onClick={runEval}
-          disabled={loading || !status?.ready}
-          style={{ alignSelf: "flex-start" }}
-        >
-          {loading ? (
-            <><span className="spinner" /> Running RAG Triad evaluation… (2–3 min)</>
-          ) : (
-            "▶ Run Full Evaluation"
+        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+          <button
+            id="btn-run-eval"
+            className="btn btn-primary"
+            onClick={runEval}
+            disabled={loading || !status?.ready}
+          >
+            {loading ? (
+              <><span className="spinner" /> Running RAG Triad evaluation… (2–3 min)</>
+            ) : (
+              "▶ Run Full Evaluation"
+            )}
+          </button>
+
+          {report && (
+            <button
+              id="btn-download-json"
+              className="btn btn-ghost"
+              onClick={() => {
+                const blob = new Blob([JSON.stringify(report, null, 2)], { type: "application/json" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "rag_evaluation_report.json";
+                a.click();
+                URL.revokeObjectURL(url);
+              }}
+            >
+              ⬇️ Download JSON
+            </button>
           )}
-        </button>
+        </div>
 
         {!status?.ready && (
           <div className="eval-warning">

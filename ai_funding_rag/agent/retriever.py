@@ -48,6 +48,15 @@ class Retriever:
         vector_store: BaseVectorStore,
         use_query_expansion: bool = True,
     ) -> None:
+        """
+        Initialise the Retriever.
+
+        Args:
+            settings:            Configuration (model, top_k, API key, etc.).
+            embedder:            Embedder used to vectorise search queries.
+            vector_store:        Vector database to search against.
+            use_query_expansion: If True, uses LLM to generate sub-queries.
+        """
         self._settings = settings
         self._embedder = embedder
         self._vector_store = vector_store
@@ -57,6 +66,21 @@ class Retriever:
     # ── public ───────────────────────────────────────────────────────────────
 
     def retrieve(self, query: str, top_k: Optional[int] = None) -> RetrievalTrace:
+        """
+        Retrieve the top-k most relevant chunks for a user query.
+
+        Optionally expands the query into multiple semantically diverse
+        sub-queries, searches each against the vector store, deduplicates
+        results by chunk_id, and returns the top-k ranked by distance.
+
+        Args:
+            query: Natural-language query from the user.
+            top_k: Override the number of chunks to retrieve (defaults to settings).
+
+        Returns:
+            RetrievalTrace containing the original query, expanded queries,
+            retrieved chunks, and the formatted context string.
+        """
         k = top_k or self._settings.top_k
         expanded_queries = [query]
 
