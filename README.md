@@ -200,7 +200,7 @@ Opens `data/evaluation/report.html` in your browser for a visual results table.
 | Chunking | Sliding window (800/150) | Balances context vs. retrieval precision |
 | Embedding Model | all-MiniLM-L6-v2 (local) | No API quota, fast, offline |
 | Vector Store | ChromaDB (persistent) | Local, no cloud dependency, HNSW index |
-| LLM | Gemini 2.0 Flash | Low latency, strong instruction following |
+| LLM | Gemini 2.5 Flash | Low latency, strong instruction following |
 | Query Expansion | LLM-generated sub-queries | Improves recall for complex questions |
 | Evaluation | RAG Triad (LLM-as-judge) | Industry-standard 3-dimensional scoring |
 
@@ -247,7 +247,7 @@ Run: `python evaluate.py`
 ## 👥 Authors
 
 DS205.3 Group – Faculty of Computing
-- Kisara00555 – Data Ingestion & Chunking Pipeline
+- Kisara – Data Ingestion & Chunking Pipeline
 - Dilusha – RAG Agent & FastAPI Backend
 - Savindi – Evaluation Framework & Ground Truth
 - Tharusha – React UI, Report & Documentation

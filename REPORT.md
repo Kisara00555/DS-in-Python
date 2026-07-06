@@ -1,6 +1,6 @@
 # DS205.3 Coursework — Technical Report
 ## AI Startup Funding & Investment Intelligence Assistant
-**Group Members:** Kisara00555, Dilusha, Savindi, Tharusha | **Date:** July 2026
+**Group Members:** Kisara, Dilusha, Savindi, Tharusha | **Date:** July 2026
 
 ---
 

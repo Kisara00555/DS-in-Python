@@ -1,7 +1,7 @@
 import "./AboutPanel.css";
 
 const TEAM = [
-  { name: "Kisara00555", role: "Member 1 – Data Ingestion & Chunking Pipeline" },
+  { name: "Kisara", role: "Member 1 – Data Ingestion & Chunking Pipeline" },
   { name: "Dilusha", role: "Member 2 – RAG Agent & FastAPI Backend" },
   { name: "Savindi", role: "Member 3 – Evaluation Framework & Ground Truth" },
   { name: "Tharusha", role: "Member 4 – React UI, Report & Documentation" },
@@ -39,7 +39,7 @@ export default function AboutPanel() {
           </div>
           <div className="about-meta-card glass">
             <span className="about-meta-label">LLM</span>
-            <span className="about-meta-value">Gemini 2.0 Flash</span>
+            <span className="about-meta-value">Gemini 2.5 Flash</span>
           </div>
           <div className="about-meta-card glass">
             <span className="about-meta-label">Vector DB</span>
@@ -69,7 +69,7 @@ export default function AboutPanel() {
             { label: "Chunking", value: "Sliding Window (800/150)" },
             { label: "Embeddings", value: "all-MiniLM-L6-v2 (local)" },
             { label: "Vector Store", value: "ChromaDB (persistent)" },
-            { label: "LLM", value: "Gemini 2.0 Flash" },
+            { label: "LLM", value: "Gemini 2.5 Flash" },
             { label: "Evaluation", value: "RAG Triad (TruEra)" },
             { label: "Backend", value: "FastAPI" },
             { label: "Frontend", value: "React + Vite" },
