@@ -22,7 +22,7 @@ class TextChunk:
     """Value object representing a single text chunk ready for embedding."""
  
     chunk_id: str           # Unique ID: "{source}_p{page}_{idx}"
-    source: str
+    source: str 
     page_number: int
     text: str
     metadata: dict = field(default_factory=dict)
