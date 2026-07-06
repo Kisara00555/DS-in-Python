@@ -231,7 +231,7 @@ DS205.3 Group – Faculty of Computing
 - Kisara00555 – Data Ingestion & Chunking Pipeline
 - Dilusha – RAG Agent & FastAPI Backend
 - Savindi – Evaluation Framework & Ground Truth
-- Agent – React UI, Report & Documentation
+- Tharusha – React UI, Report & Documentation
 
 ## AI Usage Disclosure
 In accordance with coursework guidelines, we acknowledge the use of AI (Google Gemini) during this project as a pair-programming assistant.

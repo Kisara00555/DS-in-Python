@@ -4,7 +4,7 @@ const TEAM = [
   { name: "Kisara00555", role: "Member 1 – Data Ingestion & Chunking Pipeline" },
   { name: "Dilusha", role: "Member 2 – RAG Agent & FastAPI Backend" },
   { name: "Savindi", role: "Member 3 – Evaluation Framework & Ground Truth" },
-  { name: "[Member 4 Name]", role: "Member 4 – React UI, Report & Documentation" },
+  { name: "Tharusha", role: "Member 4 – React UI, Report & Documentation" },
 ];
 
 export default function AboutPanel() {
