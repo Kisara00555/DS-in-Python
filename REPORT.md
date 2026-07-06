@@ -20,8 +20,19 @@ In the context of financial and investment intelligence, hallucination is not me
 
 The architecture of our AI Startup Funding Assistant is designed around modularity, scalability, and strict separation of concerns. The data flow pipeline is structured into distinct, sequential stages:
 
-**Data Flow:**
-`PDF Document → PyMuPDFLoader → SlidingWindowChunker → LocalEmbedder → ChromaDB (Vector Store) → Query Expansion (Retriever) → LLM Generator → Grounded Answer`
+**Data Flow Diagram:**
+
+```mermaid
+graph TD
+    A[PDF Document] -->|PyMuPDFLoader| B(Raw Text)
+    B -->|SlidingWindowChunker| C(Text Chunks)
+    C -->|LocalEmbedder| D[(ChromaDB Vector Store)]
+    
+    E[User Query] -->|Retriever| F{Query Expansion}
+    F -->|Multiple Sub-queries| D
+    D -->|Top-k Unique Chunks| G(LLM Generator)
+    G --> H[Grounded Answer]
+```
 
 ### Abstract Base Classes (ABC) and Dependency Injection
 A core architectural decision was the extensive use of Abstract Base Classes (ABCs) and Dependency Injection (DI). In Python, ABCs allow us to define rigid interfaces for our core components (e.g., `BaseLoader`, `BaseChunker`, `BaseEmbedder`, `BaseVectorStore`). By programming against these interfaces rather than concrete implementations, the system becomes highly extensible. For instance, the `RAGAgent` does not need to know if it is talking to a local ChromaDB instance or a cloud-hosted Pinecone cluster; it only knows it has a `BaseVectorStore` that implements a `.search()` method. 
