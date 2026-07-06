@@ -84,7 +84,7 @@ def main() -> None:
     if args.question:
         print(f"\n🔬  Evaluating single question: {args.question!r}\n")
         result = agent.ask(args.question, show_trace=False)
-        sources = [c.metadata.get("filename", c.source) for c in result.trace.retrieved_chunks]
+        sources = [c.metadata.get("filename", "Unknown") for c in result.trace.retrieved_chunks]
         record = evaluator.evaluate_answer(
             question=args.question,
             ground_truth="(no ground truth — ad-hoc evaluation)",

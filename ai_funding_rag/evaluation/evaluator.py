@@ -502,7 +502,7 @@ class Evaluator:
 
             # Pass the actual retrieved context to the judge for Context Relevance scoring
             sources = [
-                c.metadata.get("filename", c.source)
+                c.metadata.get("filename", "Unknown")
                 for c in result.trace.retrieved_chunks
             ]
             record = self.evaluate_answer(
