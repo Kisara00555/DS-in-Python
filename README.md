@@ -122,11 +122,16 @@ start_app.py                     # Launch API + UI together
 git clone <your-repo-url>
 cd "DS Coursework"
 
+# Python Backend Dependencies
 python -m venv venv
 venv\Scripts\activate          # Windows
 # source venv/bin/activate     # macOS/Linux
-
 pip install -r requirements.txt
+
+# React UI Dependencies
+cd ui
+npm install
+cd ..
 ```
 
 ### 2. Configure environment

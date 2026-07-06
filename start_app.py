@@ -44,8 +44,17 @@ def run():
         cwd=str(ROOT),
     )
 
-    # Start Vite dev server
+    # Check if UI dependencies need to be installed
+    node_modules = UI_DIR / "node_modules"
     npm = "npm.cmd" if sys.platform == "win32" else "npm"
+    
+    if not node_modules.exists():
+        print("   Detected missing Node modules. Installing React dependencies...")
+        subprocess.run([npm, "install"], cwd=str(UI_DIR), check=True)
+        print("   Dependencies installed!\n")
+
+    # Start Vite dev server
+
     frontend = subprocess.Popen(
         [npm, "run", "dev"],
         cwd=str(UI_DIR),
