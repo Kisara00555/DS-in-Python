@@ -12,9 +12,10 @@ build/
 # Vector store (large binary files — regenerate with ingest.py)
 data/vector_store/
 
-# Evaluation results (auto-generated)
-data/evaluation/results.json
-data/evaluation/report.html
+# Evaluation results
+# We are committing these so the lecturer can see the generated report
+# data/evaluation/results.json
+# data/evaluation/report.html
 
 # IDE
 .vscode/
