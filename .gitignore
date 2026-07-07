@@ -23,3 +23,6 @@ data/evaluation/results.json
 # OS
 .DS_Store
 Thumbs.db
+
+REPORT.md
+REPORT.docx
