@@ -27,8 +27,9 @@ class Settings:
     """Immutable configuration object passed via dependency injection."""
 
     # ── LLM ─────────────────────────────────────────────────────────────────────
+    groq_api_key: str = field(default_factory=lambda: os.getenv("GROQ_API_KEY", ""))
     google_api_key: str = field(default_factory=lambda: os.getenv("GOOGLE_API_KEY", ""))
-    llm_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL", "gemini-2.0-flash"))
+    llm_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL", "llama-3.1-8b-instant"))
     llm_temperature: float = field(
         default_factory=lambda: float(os.getenv("LLM_TEMPERATURE", "0.0"))
     )
@@ -82,14 +83,12 @@ class Settings:
 
     def validate(self) -> None:
         """Raise if critical fields are missing."""
-        # GOOGLE_API_KEY is required for the LLM (Gemini) and for GeminiEmbedder.
-        # It is NOT required when using LocalEmbedder.
-        if not self.google_api_key:
+        # GROQ_API_KEY is required for the LLM.
+        if not self.groq_api_key:
             raise EnvironmentError(
-                "GOOGLE_API_KEY is not set. "
-                "Get a free key at https://aistudio.google.com/app/apikey "
-                "and add it to your .env file. "
-                "(It is still needed for the LLM — only the embedding is local.)"
+                "GROQ_API_KEY is not set. "
+                "Get a free key at https://console.groq.com/keys "
+                "and add it to your .env file."
             )
 
 

@@ -144,7 +144,7 @@ def health():
 def get_status():
     """Check if the system is ready."""
     settings = default_settings
-    api_key_set = bool(settings.google_api_key)
+    api_key_set = bool(settings.groq_api_key)
     corpus_size = 0
     if api_key_set:
         try:

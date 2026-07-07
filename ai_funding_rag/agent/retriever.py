@@ -11,8 +11,7 @@ import logging
 from dataclasses import dataclass, field
 from typing import List, Optional
 
-from google import genai
-from google.genai import types as genai_types
+import groq
 
 from ..config.settings import Settings
 from ..vectorstore.embedder import BaseEmbedder
@@ -61,7 +60,7 @@ class Retriever:
         self._embedder = embedder
         self._vector_store = vector_store
         self._use_query_expansion = use_query_expansion
-        self._client = genai.Client(api_key=settings.google_api_key)
+        self._client = groq.Groq(api_key=settings.groq_api_key)
 
     # ── public ───────────────────────────────────────────────────────────────
 
@@ -124,15 +123,13 @@ class Retriever:
         """Use LLM to generate semantically diverse search queries."""
         try:
             prompt = QUERY_EXPANSION_TEMPLATE.format(question=query)
-            response = self._client.models.generate_content(
+            response = self._client.chat.completions.create(
                 model=self._settings.llm_model,
-                contents=prompt,
-                config=genai_types.GenerateContentConfig(
-                    temperature=0.3,
-                    max_output_tokens=200,
-                ),
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.3,
+                max_tokens=200,
             )
-            raw = response.text or ""
+            raw = response.choices[0].message.content or ""
             queries = [q.strip() for q in raw.strip().split("\n") if q.strip()]
             return [query] + queries[:3]   # Original + up to 3 expansions
         except Exception as exc:

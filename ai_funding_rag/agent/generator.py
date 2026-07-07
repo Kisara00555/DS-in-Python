@@ -11,8 +11,9 @@ import logging
 from dataclasses import dataclass
 from typing import List
 
-from google import genai
-from google.genai import types as genai_types
+from typing import List, Dict
+
+import groq
 
 from ..config.settings import Settings
 from .prompts import RAG_PROMPT_TEMPLATE, SYSTEM_PROMPT
@@ -41,19 +42,17 @@ class Generator:
 
     def __init__(self, settings: Settings) -> None:
         """
-        Initialise the Generator with a Gemini client and empty history.
+        Initialise the Generator with a Groq client and empty history.
 
         Args:
             settings: Configuration object supplying the API key, model name,
                       and temperature for the generative model.
         """
         self._settings = settings
-        self._client = genai.Client(api_key=settings.google_api_key)
-        self._gen_config = genai_types.GenerateContentConfig(
-            system_instruction=SYSTEM_PROMPT,
-            temperature=settings.llm_temperature,
-        )
-        self._history: List[genai_types.Content] = []
+        self._client = groq.Groq(api_key=settings.groq_api_key)
+        self._history: List[Dict[str, str]] = [
+            {"role": "system", "content": SYSTEM_PROMPT}
+        ]
 
     # ── public ───────────────────────────────────────────────────────────────
 
@@ -65,27 +64,27 @@ class Generator:
         )
 
         # Build full contents list: history + current user message
-        contents = self._history + [
-            genai_types.Content(role="user", parts=[genai_types.Part(text=user_content)])
+        messages = self._history + [
+            {"role": "user", "content": user_content}
         ]
 
-        response = self._client.models.generate_content(
+        response = self._client.chat.completions.create(
             model=self._settings.llm_model,
-            contents=contents,
-            config=self._gen_config,
+            messages=messages,
+            temperature=self._settings.llm_temperature,
         )
 
-        answer = response.text or ""
-        input_tokens = response.usage_metadata.prompt_token_count if response.usage_metadata else 0
-        output_tokens = response.usage_metadata.candidates_token_count if response.usage_metadata else 0
+        answer = response.choices[0].message.content or ""
+        input_tokens = response.usage.prompt_tokens if response.usage else 0
+        output_tokens = response.usage.completion_tokens if response.usage else 0
 
         # Store compressed history (original question + answer only, not full context)
-        self._history.append(genai_types.Content(role="user",  parts=[genai_types.Part(text=trace.original_query)]))
-        self._history.append(genai_types.Content(role="model", parts=[genai_types.Part(text=answer)]))
+        self._history.append({"role": "user", "content": trace.original_query})
+        self._history.append({"role": "assistant", "content": answer})
 
-        # Keep history bounded to last 10 turns (20 messages)
-        if len(self._history) > 20:
-            self._history = self._history[-20:]
+        # Keep history bounded to last 10 turns (20 messages) + 1 system prompt
+        if len(self._history) > 21:
+            self._history = [self._history[0]] + self._history[-20:]
 
         logger.info(
             "Generated answer: %d input tokens, %d output tokens",
@@ -104,6 +103,6 @@ class Generator:
 
     def reset_history(self) -> None:
         """Clear conversation history (start fresh session)."""
-        self._history.clear()
+        self._history = [{"role": "system", "content": SYSTEM_PROMPT}]
         logger.info("Conversation history cleared.")
 

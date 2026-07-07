@@ -1,6 +1,7 @@
 # ── Core LLM / Gemini SDK ───────────────────────────────────────────────────────
 # New unified Google Gen AI SDK (provides `from google import genai`)
 google-genai>=1.0.0
+groq>=0.5.0
 
 # ── Local Embeddings (sentence-transformers) ───────────────────────────────────
 # Model: all-MiniLM-L6-v2 — 384-dim, offline, no API quota
