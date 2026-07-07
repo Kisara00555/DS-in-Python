@@ -28,7 +28,7 @@ class Settings:
 
     # ── LLM ─────────────────────────────────────────────────────────────────────
     google_api_key: str = field(default_factory=lambda: os.getenv("GOOGLE_API_KEY", ""))
-    llm_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL", "gemini-2.0-flash"))
+    llm_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL", "gemini-1.5-flash"))
     llm_temperature: float = field(
         default_factory=lambda: float(os.getenv("LLM_TEMPERATURE", "0.0"))
     )
