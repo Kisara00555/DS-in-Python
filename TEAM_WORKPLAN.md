@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 # 4. Copy and fill in your .env
 copy .env.example .env
-# Open .env and paste your GOOGLE_API_KEY
+# Open .env and paste your GROQ_API_KEY
 
 # 5. Install frontend dependencies
 cd ui && npm install && cd ..

@@ -5,9 +5,7 @@ Centralised application configuration loaded from environment variables.
 Uses dependency injection: every component receives a Settings instance.
 
 Embedding strategy:
-  - Default: LocalEmbedder  — sentence-transformers/all-MiniLM-L6-v2
-    No API key required. No rate limits. Model is cached locally (~80 MB).
-  - Legacy:  GeminiEmbedder — requires GOOGLE_API_KEY, subject to quota.
+  - Default: LocalEmbedder (sentence-transformers) — no API key needed, offline.
 """
 
 from __future__ import annotations
@@ -28,15 +26,12 @@ class Settings:
 
     # ── LLM ─────────────────────────────────────────────────────────────────────
     groq_api_key: str = field(default_factory=lambda: os.getenv("GROQ_API_KEY", ""))
-    google_api_key: str = field(default_factory=lambda: os.getenv("GOOGLE_API_KEY", ""))
     llm_model: str = field(default_factory=lambda: os.getenv("LLM_MODEL", "llama-3.1-8b-instant"))
     llm_temperature: float = field(
         default_factory=lambda: float(os.getenv("LLM_TEMPERATURE", "0.0"))
     )
 
     # ── Embeddings ──────────────────────────────────────────────────────────────
-    # Default: all-MiniLM-L6-v2 (local, offline, no API key needed)
-    # To use Gemini instead, set EMBEDDING_MODEL=gemini-embedding-2 in .env
     embedding_model: str = field(
         default_factory=lambda: os.getenv(
             "EMBEDDING_MODEL", "all-MiniLM-L6-v2"

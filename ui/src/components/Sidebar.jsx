@@ -9,7 +9,7 @@ const NAV_ITEMS = [
 
 function getSystemStatus(status) {
   if (!status) return { dot: "red", label: "Offline", sub: "API unreachable" };
-  if (!status.api_key_set) return { dot: "red", label: "No API Key", sub: "Set GOOGLE_API_KEY" };
+  if (!status.api_key_set) return { dot: "red", label: "No API Key", sub: "Set GROQ_API_KEY" };
   if (!status.ready) return { dot: "amber", label: "Empty Corpus", sub: "Ingest PDFs first" };
   return { dot: "green", label: "Ready", sub: `${status.corpus_size} chunks` };
 }
