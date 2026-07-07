@@ -177,7 +177,7 @@ class RAGAgent:
         print(f"Chunks retrieved: {len(trace.retrieved_chunks)}")
         print("-" * 70)
         for i, chunk in enumerate(trace.retrieved_chunks, start=1):
-            src = chunk.metadata.get("filename", chunk.source)
+            src = chunk.metadata.get("filename", "Unknown")
             pg = chunk.metadata.get("page_number", "?")
             print(f"\n[Chunk {i}] {src}  |  Page {pg}  |  Similarity: {chunk.similarity:.3f}")
             print(chunk.text[:300] + ("…" if len(chunk.text) > 300 else ""))
