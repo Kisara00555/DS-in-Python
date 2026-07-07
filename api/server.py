@@ -181,7 +181,7 @@ def chat(req: ChatRequest):
         )
     except Exception as e:
         logger.exception("Error during agent.ask(): %s", e)
-        raise HTTPException(status_code=500, detail=f"Agent error: {str(e)}")
+        return JSONResponse(status_code=500, content={"detail": f"Agent error: {str(e)}"})
 
     chunks_out = [
         ChatChunk(
