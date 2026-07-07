@@ -14,6 +14,13 @@ from __future__ import annotations
 import argparse
 import logging
 import sys
+import io
+
+# ── Fix emoji/unicode output on Windows (cp1252 console) ────────────────────
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+if sys.stderr.encoding and sys.stderr.encoding.lower() != "utf-8":
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 
 logging.basicConfig(
     level=logging.WARNING,          # Keep logs quiet during interactive chat
