@@ -173,11 +173,15 @@ def chat(req: ChatRequest):
             detail="Vector store is empty. Please ingest PDFs first.",
         )
 
-    result = agent.ask(
-        question=req.question,
-        top_k=req.top_k,
-        show_trace=False,  # UI handles trace display
-    )
+    try:
+        result = agent.ask(
+            question=req.question,
+            top_k=req.top_k,
+            show_trace=False,  # UI handles trace display
+        )
+    except Exception as e:
+        logger.exception("Error during agent.ask(): %s", e)
+        raise HTTPException(status_code=500, detail=f"Agent error: {str(e)}")
 
     chunks_out = [
         ChatChunk(
