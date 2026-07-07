@@ -130,23 +130,53 @@ start_app.py                     # Launch API + UI together
 
 ## ⚡ Quick Start
 
+> **⚠️ Important:** The `venv/` folder is **not included in the repository** — every person must create it on their own machine by following the steps below. Skipping this is the most common cause of *"module not found"* errors.
+
+---
+
 ### 1. Clone & set up environment
 
 ```bash
 git clone <your-repo-url>
 cd "DS Coursework"
+```
 
-# Python Backend Dependencies
+**Create and activate the virtual environment:**
+
+```bash
+# Create venv (only needed once per machine)
 python -m venv venv
+
+# Activate it — you must do this EVERY time you open a new terminal
 venv\Scripts\activate          # Windows
 # source venv/bin/activate     # macOS/Linux
-pip install -r requirements.txt
+```
 
-# React UI Dependencies
+Your terminal prompt should now show `(venv)` at the start — this confirms it's active.
+
+**Install all Python dependencies into the venv:**
+
+```bash
+pip install -r requirements.txt
+```
+
+**✅ Verify the install worked** (run this before anything else):
+
+```bash
+pip show google-genai chromadb sentence-transformers fastapi uvicorn PyMuPDF
+```
+
+All six packages should show a `Name:` and `Version:` — if any say *"not found"*, re-run `pip install -r requirements.txt` with the venv active.
+
+**Install React UI dependencies:**
+
+```bash
 cd ui
 npm install
 cd ..
 ```
+
+---
 
 ### 2. Configure environment
 
@@ -155,7 +185,9 @@ copy .env.example .env       # Windows
 # cp .env.example .env       # macOS/Linux
 ```
 
-Edit `.env` and set your `GOOGLE_API_KEY`.
+Edit `.env` and set your `GOOGLE_API_KEY` (free at [aistudio.google.com](https://aistudio.google.com/app/apikey)).
+
+---
 
 ### 3. Add your PDFs
 
@@ -170,25 +202,54 @@ Suggested sources:
 - a16z / Sequoia published investment theses
 - State of AI reports (Air Street Capital)
 
+---
+
 ### 4. Ingest
 
 ```bash
+# Make sure (venv) is active in your terminal first!
 python ingest.py --source ./data/pdfs
 ```
 
-### 5. Chat
+---
+
+### 5. Run the full app
+
+```bash
+python start_app.py
+```
+
+This launches the FastAPI backend and opens the React UI in your browser automatically.
+
+---
+
+### 6. Chat (CLI alternative)
 
 ```bash
 python chat.py
 ```
 
-### 6. Evaluate (RAG Triad)
+---
+
+### 7. Evaluate (RAG Triad)
 
 ```bash
 python evaluate.py
 ```
 
 Opens `data/evaluation/report.html` in your browser for a visual results table.
+
+---
+
+### 🚨 Common Errors & Fixes
+
+| Error | Cause | Fix |
+|---|---|---|
+| `ModuleNotFoundError: No module named 'X'` | venv not activated or `pip install` not run | Activate venv → re-run `pip install -r requirements.txt` |
+| `(venv)` not showing in terminal | venv not activated | Run `venv\Scripts\activate` (Windows) |
+| `pip` installs to wrong Python | Using system Python instead of venv | Always activate venv **before** running pip |
+| `npm: command not found` | Node.js not installed | Download from [nodejs.org](https://nodejs.org) |
+| `GOOGLE_API_KEY not set` | `.env` file missing or key empty | Copy `.env.example` → `.env` and fill in your key |
 
 ---
 
