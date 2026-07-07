@@ -495,31 +495,43 @@ class Evaluator:
         items = self.load_ground_truth(ground_truth_path)
         records: List[EvaluationRecord] = []
 
+        import time
         for item in items:
             logger.info("Evaluating %s: %s", item.question_id, item.question[:60])
-            result = agent.ask(item.question, show_trace=False)
-
-            # Pass the actual retrieved context to the judge for Context Relevance scoring
-            sources = [
-                c.metadata.get("filename", "Unknown")
-                for c in result.trace.retrieved_chunks
-            ]
-            record = self.evaluate_answer(
-                question=item.question,
-                ground_truth=item.ground_truth_answer,
-                system_answer=result.answer,
-                retrieved_context=result.trace.context_text,
-                retrieved_sources=sources,
-                question_id=item.question_id,
-            )
-            records.append(record)
-            print(
-                f"  [{item.question_id}] "
-                f"CtxRel={record.context_relevance_score:.2f} | "
-                f"Faith={record.faithfulness_score:.2f} | "
-                f"AnsRel={record.answer_relevance_score:.2f} | "
-                f"RAG={record.rag_score:.2f}"
-            )
+            
+            max_retries = 5
+            for attempt in range(max_retries):
+                try:
+                    result = agent.ask(item.question, show_trace=False)
+                    sources = [
+                        c.metadata.get("filename", "Unknown")
+                        for c in result.trace.retrieved_chunks
+                    ]
+                    record = self.evaluate_answer(
+                        question=item.question,
+                        ground_truth=item.ground_truth_answer,
+                        system_answer=result.answer,
+                        retrieved_context=result.trace.context_text,
+                        retrieved_sources=sources,
+                        question_id=item.question_id,
+                    )
+                    records.append(record)
+                    print(
+                        f"  [{item.question_id}] "
+                        f"CtxRel={record.context_relevance_score:.2f} | "
+                        f"Faith={record.faithfulness_score:.2f} | "
+                        f"AnsRel={record.answer_relevance_score:.2f} | "
+                        f"RAG={record.rag_score:.2f}"
+                    )
+                    break  # Success, exit retry loop
+                except Exception as e:
+                    if "429" in str(e) or "rate_limit" in str(e).lower() or "Rate limit" in str(e):
+                        print(f"⚠️  Groq Rate Limit hit. Sleeping for 15 seconds... (Attempt {attempt+1}/{max_retries})")
+                        time.sleep(15)
+                        if attempt == max_retries - 1:
+                            raise e
+                    else:
+                        raise e
 
         avg_ctx  = sum(r.context_relevance_score for r in records) / len(records) if records else 0.0
         avg_fth  = sum(r.faithfulness_score       for r in records) / len(records) if records else 0.0
