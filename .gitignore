@@ -14,6 +14,7 @@ data/vector_store/
 
 # Evaluation results (auto-generated)
 data/evaluation/results.json
+data/evaluation/report.html
 
 # IDE
 .vscode/
