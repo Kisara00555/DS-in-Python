@@ -1,7 +1,7 @@
 """
 agent/generator.py
 ------------------
-LLM-based answer generator backed by Google Gemini (AI Studio).
+LLM-based answer generator backed by Groq.
 Receives formatted context + user question → produces a grounded response.
 """
 
@@ -36,7 +36,7 @@ class GenerationResult:
 
 class Generator:
     """
-    Wraps the Google Gemini GenerativeModel to produce grounded answers.
+    Wraps the Groq client to produce grounded answers.
     Maintains a conversation history for multi-turn interactions.
     """
 

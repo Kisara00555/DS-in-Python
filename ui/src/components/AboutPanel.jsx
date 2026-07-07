@@ -39,7 +39,7 @@ export default function AboutPanel() {
           </div>
           <div className="about-meta-card glass">
             <span className="about-meta-label">LLM</span>
-            <span className="about-meta-value">Gemini 2.5 Flash</span>
+            <span className="about-meta-value">Llama 3.1 8B</span>
           </div>
           <div className="about-meta-card glass">
             <span className="about-meta-label">Vector DB</span>
@@ -69,7 +69,7 @@ export default function AboutPanel() {
             { label: "Chunking", value: "Sliding Window (800/150)" },
             { label: "Embeddings", value: "all-MiniLM-L6-v2 (local)" },
             { label: "Vector Store", value: "ChromaDB (persistent)" },
-            { label: "LLM", value: "Gemini 2.5 Flash" },
+            { label: "LLM", value: "Llama 3.1 8B" },
             { label: "Evaluation", value: "RAG Triad (TruEra)" },
             { label: "Backend", value: "FastAPI" },
             { label: "Frontend", value: "React + Vite" },

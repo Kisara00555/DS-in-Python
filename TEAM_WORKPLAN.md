@@ -93,7 +93,7 @@ cd ui && npm install && cd ..
 |------|-------------|
 | `ai_funding_rag/agent/rag_agent.py` | Orchestrator — chains retrieval → generation |
 | `ai_funding_rag/agent/retriever.py` | Query expansion + vector search + dedup |
-| `ai_funding_rag/agent/generator.py` | Calls Gemini to generate the grounded answer |
+| `ai_funding_rag/agent/generator.py` | Calls Groq to generate the grounded answer |
 | `ai_funding_rag/agent/prompts.py` | System prompt and judge prompt templates |
 | `ai_funding_rag/agent/__init__.py` | Package exports |
 | `api/server.py` | FastAPI app with all 8 HTTP endpoints |
@@ -104,7 +104,7 @@ cd ui && npm install && cd ..
 
 1. **`RAGAgent`** - takes a question, calls `Retriever.retrieve()`, then `Generator.generate()`. Maintains conversation history.
 2. **`Retriever`** - uses LLM to expand the query into 3 sub-queries, searches each, deduplicates by `chunk_id`.
-3. **`Generator`** - formats the retrieved chunks as context and calls Gemini's `generate_content()`.
+3. **`Generator`** - formats the retrieved chunks as context and calls Groq's `chat.completions.create()`.
 4. **`server.py`** - FastAPI app. Every endpoint is documented with OpenAPI. Uses a global `RAGAgent` singleton.
 
 ### 10-Day Commit Plan
@@ -116,7 +116,7 @@ cd ui && npm install && cd ..
 | **Day 3** | Add a `clear_history()` method to `RAGAgent` that resets `self._history` to empty list | `feat(m2/agent): add clear_history() method` |
 | **Day 4** | Read `retriever.py`. Add a retrieval timeout — if `_expand_query()` takes more than 10 seconds, fall back to the original query without expansion | `feat(m2/retriever): add 10s timeout fallback for query expansion` |
 | **Day 5** | Read `prompts.py`. Add a `SYSTEM_PROMPT_STRICT` variant — an even stricter version that adds "Do NOT speculate under any circumstances" to the rules | `feat(m2/prompts): add SYSTEM_PROMPT_STRICT variant` |
-| **Day 6** | In `generator.py`, log the exact number of input and output tokens used per call (Gemini returns these in `response.usage_metadata`) | `feat(m2/generator): log token usage per call` |
+| **Day 6** | In `generator.py`, log the exact number of input and output tokens used per call (Groq returns these in `response.usage`) | `feat(m2/generator): log token usage per call` |
 | **Day 7** | In `server.py`, add a `GET /health` endpoint that returns `{"status": "ok", "version": "1.0.0", "model": settings.LLM_MODEL}` | `feat(m2/api): add GET /health endpoint` |
 | **Day 8** | Add a request ID to every API response — generate a UUID in each endpoint and include it as `"request_id"` in the JSON | `feat(m2/api): add request_id UUID to all API responses` |
 | **Day 9** | Write full docstrings for every public method in `rag_agent.py`, `retriever.py`, and `generator.py` | `docs(m2): full docstrings for agent, retriever, generator` |
@@ -155,7 +155,7 @@ cd ui && npm install && cd ..
    - **Context Relevance**: Were the retrieved chunks useful for this question?
    - **Faithfulness**: Is the answer grounded in the context (no hallucinations)?
    - **Answer Relevance**: Does the answer actually address the question asked?
-2. **`JUDGE_PROMPT`** — the evaluator sends question + context + answer to Gemini and asks it to score 0.0 to 1.0 on all three dimensions.
+2. **`JUDGE_PROMPT`** — the evaluator sends question + context + answer to Groq and asks it to score 0.0 to 1.0 on all three dimensions.
 3. **Harmonic mean** (`EvaluationRecord.rag_score`) — punishes any single dimension being low.
 4. **`evaluate.py`** — reads `ground_truth.json`, calls the agent for each question, scores each answer, saves `results.json` and `report.html`.
 

@@ -171,7 +171,7 @@ export default function EvalPanel({ status }) {
             </div>
 
             <div className="eval-footer">
-              Evaluated at {report.evaluated_at} · LLM-as-Judge via Google Gemini · RAG Triad methodology
+              Evaluated at {report.evaluated_at} · LLM-as-Judge via Groq (Llama 3) · RAG Triad methodology
             </div>
           </div>
         )}

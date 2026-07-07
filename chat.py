@@ -24,7 +24,7 @@ logging.basicConfig(
 BANNER = """
 ╔══════════════════════════════════════════════════════════════╗
 ║   🚀  AI Startup Funding & Investment Intelligence Assistant  ║
-║       Powered by RAG + Google Gemini                         ║
+║       Powered by RAG + Groq (Llama 3.1)                      ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  Commands:  'quit' / 'exit'  → exit                         ║
 ║             'reset'          → clear conversation history    ║

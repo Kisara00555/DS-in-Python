@@ -19,7 +19,7 @@ export default function StatusBar({ status, onRefresh, modelName }) {
               <span className="status-chip-dot" />
               {ready ? `${corpusSize} chunks indexed` : "Not ready"}
             </div>
-            <span className="status-bar-model mono">✨ {modelName || "Gemini"}</span>
+            <span className="status-bar-model mono">✨ {modelName || "Groq"}</span>
           </>
         )}
         <button id="btn-refresh-status" className="btn btn-ghost" onClick={onRefresh} title="Refresh status">

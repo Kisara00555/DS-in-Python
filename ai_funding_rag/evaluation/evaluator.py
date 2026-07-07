@@ -24,8 +24,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Optional
 
-from google import genai
-from google.genai import types as genai_types
+import groq
 
 from ..config.settings import Settings
 
@@ -332,7 +331,7 @@ class EvaluationReport:
   </div>
 
   <footer>
-    DS205.3 – Data Science with Python &nbsp;|&nbsp; LLM-as-Judge evaluation via Google Gemini &nbsp;|&nbsp; RAG Triad methodology
+    DS205.3 – Data Science with Python &nbsp;|&nbsp; LLM-as-Judge evaluation via Groq (Llama 3) &nbsp;|&nbsp; RAG Triad methodology
   </footer>
 </body>
 </html>"""
@@ -401,20 +400,19 @@ class Evaluator:
 
     Loads ground-truth QA pairs, runs each question through the RAG agent,
     then scores each response across Context Relevance, Faithfulness, and
-    Answer Relevance using Gemini as an impartial judge.
+    Answer Relevance using Groq as an impartial judge.
     """
 
     def __init__(self, settings: Settings) -> None:
         """
-        Initialise the Evaluator with a Gemini judge client.
+        Initialise the Evaluator with a Groq judge client.
 
         Args:
             settings: Configuration object providing the API key and model name
                       used by the LLM judge.
         """
         self._settings = settings
-        self._client = genai.Client(api_key=settings.google_api_key)
-        self._gen_config = genai_types.GenerateContentConfig(temperature=0.0)
+        self._client = groq.Groq(api_key=settings.groq_api_key)
 
     # ── public ────────────────────────────────────────────────────────────────
 
@@ -451,12 +449,13 @@ class Evaluator:
             system_answer=system_answer,
             ground_truth=ground_truth,
         )
-        response = self._client.models.generate_content(
+        response = self._client.chat.completions.create(
             model=self._settings.llm_model,
-            contents=prompt,
-            config=self._gen_config,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            response_format={"type": "json_object"},
         )
-        raw = response.text or "{}"
+        raw = response.choices[0].message.content or "{}"
         # Strip markdown code fences if present
         raw = re.sub(r"^```[a-z]*\n?", "", raw.strip(), flags=re.IGNORECASE)
         raw = re.sub(r"```$", "", raw.strip())

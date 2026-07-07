@@ -22,7 +22,7 @@ from typing import Optional
 from ..config.settings import Settings
 from ..ingestion.chunker import BaseChunker, SlidingWindowChunker
 from ..ingestion.pdf_loader import BaseLoader, PyMuPDFLoader
-from ..vectorstore.embedder import BaseEmbedder, LocalEmbedder, GeminiEmbedder
+from ..vectorstore.embedder import BaseEmbedder, LocalEmbedder
 from ..vectorstore.store import BaseVectorStore, ChromaVectorStore
 from .generator import GenerationResult, Generator
 from .retriever import RetrievalTrace, Retriever

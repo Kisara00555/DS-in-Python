@@ -84,7 +84,7 @@ export default function CorpusPanel({ status, onRefresh }) {
             <div className={`stat-value ${status?.api_key_set ? "text-green" : "text-red"}`}>
               {status?.api_key_set ? "✅ Set" : "❌ Missing"}
             </div>
-            <div className="stat-label">Gemini API Key</div>
+            <div className="stat-label">Groq API Key</div>
           </div>
           <div className="stat-card">
             <div className={`stat-value ${status?.ready ? "text-green" : "text-amber"}`}>

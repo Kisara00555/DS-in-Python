@@ -1,6 +1,4 @@
-# ── Core LLM / Gemini SDK ───────────────────────────────────────────────────────
-# New unified Google Gen AI SDK (provides `from google import genai`)
-google-genai>=1.0.0
+# ── Core LLM / Groq SDK ───────────────────────────────────────────────────────
 groq>=0.5.0
 
 # ── Local Embeddings (sentence-transformers) ───────────────────────────────────
@@ -15,8 +13,6 @@ PyMuPDF>=1.24.0
 # ── Vector Store ──────────────────────────────────────────────
 chromadb>=0.5.0
 
-# ── HTTP (used by legacy GeminiEmbedder) ──────────────────────
-requests>=2.31.0
 
 # ── Environment / Config ──────────────────────────────────────
 python-dotenv>=1.0.0

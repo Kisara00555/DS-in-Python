@@ -50,7 +50,7 @@ User Query
              ▼
 ┌─────────────────────────┐
 │  Generator              │  ← agent/generator.py
-│  (Gemini + history)     │
+│  (Groq + history)     │
 └────────────┬────────────┘
              │
              ▼
@@ -78,7 +78,7 @@ ai_funding_rag/                  # Main Python package
 │   └── chunker.py               # Sliding-window chunker (BaseChunker ABC)
 ├── vectorstore/
 │   ├── __init__.py
-│   ├── embedder.py              # Local + Gemini embedder (BaseEmbedder ABC)
+│   ├── embedder.py              # Local + Groq embedder (BaseEmbedder ABC)
 │   └── store.py                 # ChromaDB persistent store (BaseVectorStore ABC)
 ├── agent/
 │   ├── __init__.py
@@ -163,7 +163,7 @@ pip install -r requirements.txt
 **✅ Verify the install worked** (run this before anything else):
 
 ```bash
-pip show google-genai chromadb sentence-transformers fastapi uvicorn PyMuPDF
+pip show groq chromadb sentence-transformers fastapi uvicorn PyMuPDF
 ```
 
 All six packages should show a `Name:` and `Version:` — if any say *"not found"*, re-run `pip install -r requirements.txt` with the venv active.
@@ -185,7 +185,7 @@ copy .env.example .env       # Windows
 # cp .env.example .env       # macOS/Linux
 ```
 
-Edit `.env` and set your `GOOGLE_API_KEY` (free at [aistudio.google.com](https://aistudio.google.com/app/apikey)).
+Edit `.env` and set your `GROQ_API_KEY` (free at [console.groq.com](https://console.groq.com/keys)).
 
 ---
 
@@ -249,7 +249,7 @@ Opens `data/evaluation/report.html` in your browser for a visual results table.
 | `(venv)` not showing in terminal | venv not activated | Run `venv\Scripts\activate` (Windows) |
 | `pip` installs to wrong Python | Using system Python instead of venv | Always activate venv **before** running pip |
 | `npm: command not found` | Node.js not installed | Download from [nodejs.org](https://nodejs.org) |
-| `GOOGLE_API_KEY not set` | `.env` file missing or key empty | Copy `.env.example` → `.env` and fill in your key |
+| `GROQ_API_KEY not set` | `.env` file missing or key empty | Copy `.env.example` → `.env` and fill in your key |
 
 ---
 
@@ -261,7 +261,7 @@ Opens `data/evaluation/report.html` in your browser for a visual results table.
 | Chunking | Sliding window (800/150) | Balances context vs. retrieval precision |
 | Embedding Model | all-MiniLM-L6-v2 (local) | No API quota, fast, offline |
 | Vector Store | ChromaDB (persistent) | Local, no cloud dependency, HNSW index |
-| LLM | Gemini 2.5 Flash | Low latency, strong instruction following |
+| LLM | Llama 3.1 8B | Low latency, strong instruction following |
 | Query Expansion | LLM-generated sub-queries | Improves recall for complex questions |
 | Evaluation | RAG Triad (LLM-as-judge) | Industry-standard 3-dimensional scoring |
 
@@ -300,7 +300,7 @@ Run: `python evaluate.py`
 ## 📋 Requirements
 
 - Python 3.10+
-- Google AI Studio API key (`GOOGLE_API_KEY`) — free at [aistudio.google.com](https://aistudio.google.com/app/apikey)
+- Groq API key (`GROQ_API_KEY`) — free at [console.groq.com](https://console.groq.com/keys)
 - ~200MB disk for ChromaDB + sentence-transformer model cache
 
 ---
@@ -314,7 +314,7 @@ DS205.3 Group – Faculty of Computing
 - Tharusha – React UI, Report & Documentation
 
 ## AI Usage Disclosure
-In accordance with coursework guidelines, we acknowledge the use of AI (Google Gemini) during this project as a pair-programming assistant.
+In accordance with coursework guidelines, we acknowledge the use of AI (Groq (Llama 3.1)) during this project as a pair-programming assistant.
 - **Code Generation:** AI was used to assist with boilerplate React component generation and regex parsing.
 - **Debugging:** Used for troubleshooting dependency conflicts in `PyMuPDF` and `ChromaDB`.
 - **Architectural Planning:** AI assisted in brainstorming the RAG Triad evaluation strategy.
