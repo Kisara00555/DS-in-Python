@@ -1,0 +1,67 @@
+{
+  "evaluated_at": "2026-07-07T14:22:09",
+  "summary": {
+    "total_questions": 3,
+    "avg_context_relevance": 0.4333,
+    "avg_faithfulness": 0.4,
+    "avg_answer_relevance": 0.5667,
+    "avg_rag_score": 0.4544,
+    "pass_rate": 0.3333
+  },
+  "records": [
+    {
+      "question_id": "Q01",
+      "question": "What is venture capital and how does it differ from angel investing?",
+      "ground_truth": "Venture capital (VC) is institutional funding provided by VC firms to high-growth startups in exchange for equity. Angel investing is early-stage funding from individual investors (angels) using their personal capital. VC firms manage pooled funds from LPs (Limited Partners) and typically invest larger amounts at later stages, while angels invest earlier and smaller amounts.",
+      "system_answer": "Based on the retrieved context, here's a thorough explanation of venture capital and its differences from angel investing:\n\n**Venture Capital (VC)**\n\nVenture capital refers to the investment made by venture capital firms or other institutional investors in startups or early-stage companies with high growth potential (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). These investments are typically made in exchange for equity in the company.\n\n**Angel Investing**\n\nAngel investing, on the other hand, refers to investments made by individual angel investors or angel groups in startups or early-stage companies (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). Angel investors typically invest smaller amounts of money compared to venture capital firms and often provide guidance and mentorship to the companies they invest in.\n\n**Key differences**\n\nThe available corpus does not contain sufficient information on the specific differences between venture capital and angel investing. However, it can be inferred that venture capital firms typically invest larger amounts of money and have more formalized investment processes compared to angel investors.\n\n**Corporate Venture Capital**\n\nThe context also mentions corporate venture capital, which refers to investments made by corporations in startups or early-stage companies (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This can include investments made through established corporate venture capital arms or off-balance-sheet investments.\n\n**Financing Metrics**\n\nThe context provides financing metrics for various stages of investment, including pre-seed, seed, angel, A, B, C, and D+ rounds (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). These metrics can provide insights into the trends and patterns of venture capital investments.\n\n**AI-Specific Venture Capital**\n\nThe context also mentions AI-specific venture capital, which refers to investments made in companies focused on artificial intelligence (Source: [3] ai_index_report_2026.pdf, Page ?). This can include investments in companies developing AI-related technologies, products, or services.",
+      "context_relevance_score": 0.5,
+      "faithfulness_score": 0.5,
+      "answer_relevance_score": 0.8,
+      "rag_score": 0.5714,
+      "judge_reasoning": "The system answer partially addresses the question, but some claims are not directly supported by the retrieved context, and the answer could be more concise and directly relevant.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "ai_index_report_2026.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    },
+    {
+      "question_id": "Q02",
+      "question": "What are the typical stages of startup funding rounds?",
+      "ground_truth": "Startup funding typically progresses through: Pre-seed (idea stage, friends/family/angels, < \\), Seed (product development, angels/early VC, \\-\\), Series A (product-market fit, VC, \\-\\), Series B (scaling, \\-\\), Series C+ (expansion, \\+), and finally IPO or acquisition as exit events.",
+      "system_answer": "Based on the retrieved context, the typical stages of startup funding rounds are as follows:\n\n**Pre-Seed**\n\nPre-seed rounds are generally classified as the first check from at least one institutional investor to fuel a company's development growth (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This stage is typically for companies founded less than two years ago that have not yet received institutional investor support (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\n**Seed**\n\nThe available corpus does not contain sufficient information on the seed stage.\n\n**Early-Stage**\n\nEarly-stage rounds are generally classified as Series A or B (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This stage is typically for companies that have received institutional investor support and are in the early stages of growth.\n\n**Late-Stage**\n\nLate-stage rounds are generally classified as Series C or D or later (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This stage is typically for companies that have received multiple rounds of funding and are in the later stages of growth.\n\n**Growth**\n\nGrowth rounds are typically for companies that are at least seven years old and have raised at least six VC rounds (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This stage is typically for companies that are in the growth phase and require additional funding to scale.\n\n**Corporate**\n\nCorporate rounds of funding are typically for companies that have received venture capital funding and are looking to raise additional capital from corporate investors (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\n**Venture Growth**\n\nVenture growth rounds are a new stage of funding that was introduced by PitchBook to account for growth at late-stage VC (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This stage is typically for companies that are in the growth phase and require additional funding to scale.\n\n**Private Equity (PE) Growth**\n\nPrivate equity growth rounds are typically for companies that have received a minority stake investment from a PE investor (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This stage is typically for companies that are in the growth phase and require additional funding to scale.",
+      "context_relevance_score": 0.8,
+      "faithfulness_score": 0.7,
+      "answer_relevance_score": 0.9,
+      "rag_score": 0.7916,
+      "judge_reasoning": "The system answer is mostly relevant to the question, but some claims are not directly supported by the retrieved context, and it fully addresses the question asked.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    },
+    {
+      "question_id": "Q03",
+      "question": "How do VCs calculate startup valuation and what is a cap table?",
+      "ground_truth": "VCs use methods like Comparable Company Analysis, Discounted Cash Flow (DCF), and the Venture Capital Method (terminal value / expected return). A cap table (capitalization table) is a spreadsheet listing all shareholders, their ownership percentages, and equity types (common stock, preferred stock, options). It tracks dilution across rounds.",
+      "system_answer": "Based on the retrieved context, here's a thorough explanation of how VCs calculate startup valuation and what a cap table is:\n\n**Startup Valuation**\n\nThe available corpus does not contain sufficient information on how VCs calculate startup valuation.\n\n**Cap Table**\n\nA cap table is not explicitly mentioned in the context. However, it can be inferred that a cap table is a document that outlines the ownership structure of a company, including the number and percentage of shares held by each investor (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\n**Pre-Seed/Seed Stage**\n\nThe pre-seed stage encompasses a collection of emergent startups receiving the first check from at least one institutional investor to fuel their development growth (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This stage is typically for companies that have not yet received institutional investor support.\n\n**VC Funds**\n\nFundraising PitchBook defines VC funds as pools of capital raised for the purpose of investing in the equity of startup companies (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This includes funds raised by traditional VC firms and institutions with the primary intent of investing in startup companies.\n\n**VC Investment Activity**\n\nVC investors in Japan became more selective in Q1'26, focusing on backing high-performance startups rather than high-risk ones (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). This has created some challenges in Japan's growing VC ecosystem.\n\n**VC Funding Challenges**\n\nStartups in less optimal positions continued to face funding challenges in Q1'26, leading some to accept more rigorous terms in exchange for VC funding and others to look for more creative and non-dilutive funding options, including taking on venture debt (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).",
+      "context_relevance_score": 0.0,
+      "faithfulness_score": 0.0,
+      "answer_relevance_score": 0.0,
+      "rag_score": 0.0,
+      "judge_reasoning": "The system answer fails to address the question, and its claims are not supported by the retrieved context.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    }
+  ]
+}
