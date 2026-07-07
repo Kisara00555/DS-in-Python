@@ -114,10 +114,10 @@ start_app.py                     # Launch API + UI together
 
 ## 🖼️ Screenshots
 
-![Chat Panel UI Placeholder](https://placehold.co/800x400/png?text=Replace+with+Chat+Panel+Screenshot)
+![Chat Panel UI](ui/src/assets/chat_panel.png)
 *Screenshot 1: The AI Funding Assistant Chat Interface*
 
-![Trace Panel UI Placeholder](https://placehold.co/800x400/png?text=Replace+with+Trace+Panel+Screenshot)
+![Trace Panel UI](ui/src/assets/trace_panel.png)
 *Screenshot 2: The Trace Panel showing retrieved context chunks*
 
 ---
