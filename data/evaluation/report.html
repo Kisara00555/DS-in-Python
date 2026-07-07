@@ -63,29 +63,29 @@
 <body>
   <h1>🔬 RAG Triad Evaluation Report</h1>
   <div class="subtitle">AI Startup Funding &amp; Investment Intelligence Assistant — DS205.3</div>
-  <div class="meta">Evaluated: 2026-07-07T14:22:09 &nbsp;|&nbsp; Questions: 3</div>
+  <div class="meta">Evaluated: 2026-07-07T19:53:24 &nbsp;|&nbsp; Questions: 6</div>
 
   <!-- Summary Cards -->
   <div class="cards">
     <div class="card">
       <div class="card-label">Avg RAG Score</div>
-      <div class="card-value red">45%</div>
+      <div class="card-value amber">66%</div>
     </div>
     <div class="card">
       <div class="card-label">Context Relevance</div>
-      <div class="card-value red">43%</div>
+      <div class="card-value amber">68%</div>
     </div>
     <div class="card">
       <div class="card-label">Faithfulness</div>
-      <div class="card-value red">40%</div>
+      <div class="card-value amber">65%</div>
     </div>
     <div class="card">
       <div class="card-label">Answer Relevance</div>
-      <div class="card-value red">57%</div>
+      <div class="card-value amber">77%</div>
     </div>
     <div class="card">
       <div class="card-label">Total Questions</div>
-      <div class="card-value" style="color:var(--accent)">3</div>
+      <div class="card-value" style="color:var(--accent)">6</div>
     </div>
   </div>
 
@@ -135,10 +135,10 @@
               <td class="qid">Q01</td>
               <td class="question">What is venture capital and how does it differ from angel investing?</td>
               <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">50%</span></td>
-              <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">50%</span></td>
               <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
-              <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">57%</span></td>
-              <td class="reasoning">The system answer partially addresses the question, but some claims are not directly supported by the retrieved context, and the answer could be more concise and directly relevant.</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#f59e0b;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">68%</span></td>
+              <td class="reasoning">The system answer is mostly faithful to the context, but some claims are not directly supported, and the answer is mostly relevant to the question, but could be more concise.</td>
             </tr>
             <tr>
               <td class="qid">Q02</td>
@@ -147,16 +147,43 @@
               <td class="score"><span style="background:#f59e0b;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">70%</span></td>
               <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
               <td class="score"><span style="background:#f59e0b;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">79%</span></td>
-              <td class="reasoning">The system answer is mostly relevant to the question, but some claims are not directly supported by the retrieved context, and it fully addresses the question asked.</td>
+              <td class="reasoning">The system answer is mostly relevant to the question, but some claims are not fully supported by the retrieved context, and it partially addresses the question, but with some minor inaccuracies.</td>
             </tr>
             <tr>
               <td class="qid">Q03</td>
-              <td class="question">How do VCs calculate startup valuation and what is a cap table?</td>
+              <td class="question">What was the total amount of VC funding raised globally in Q1 2026?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="reasoning">The system answer is fully supported by the retrieved context, directly addresses the question, and all factual claims are explicitly present in the context.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q04</td>
+              <td class="question">How many VC deals were completed globally in Q1 2026?</td>
+              <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">50%</span></td>
               <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">0%</span></td>
               <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">0%</span></td>
               <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">0%</span></td>
-              <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">0%</span></td>
-              <td class="reasoning">The system answer fails to address the question, and its claims are not supported by the retrieved context.</td>
+              <td class="reasoning">The system failed to provide a relevant answer, as it did not attempt to extract the number of VC deals from the context, and instead provided a generic statement about the global VC market.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q05</td>
+              <td class="question">What is the difference between pre-money and post-money valuation?</td>
+              <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">50%</span></td>
+              <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">50%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#ef4444;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">57%</span></td>
+              <td class="reasoning">The system answer partially addresses the question, but the retrieved context is only partially relevant and the system answer contains some factual claims not explicitly present in the context.</td>
+            </tr>
+            <tr>
+              <td class="qid">Q06</td>
+              <td class="question">Which sector dominated deal value and funding in the Q1 2026 report?</td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">80%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">90%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">100%</span></td>
+              <td class="score"><span style="background:#22c55e;color:#fff;padding:2px 8px;border-radius:12px;font-weight:600;font-size:0.85em;">89%</span></td>
+              <td class="reasoning">The system answer is mostly grounded in the retrieved context, with some minor omissions, and directly addresses the question, but the context relevance score is lower due to some off-topic chunks.</td>
             </tr>
       </tbody>
     </table>

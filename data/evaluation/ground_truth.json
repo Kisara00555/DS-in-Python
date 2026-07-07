@@ -15,7 +15,7 @@
   {
     "question_id": "Q02",
     "question": "What are the typical stages of startup funding rounds?",
-    "ground_truth_answer": "Startup funding typically progresses through: Pre-seed (idea stage, friends/family/angels, < \\), Seed (product development, angels/early VC, \\-\\), Series A (product-market fit, VC, \\-\\), Series B (scaling, \\-\\), Series C+ (expansion, \\+), and finally IPO or acquisition as exit events.",
+    "ground_truth_answer": "Startup funding typically progresses through: Pre-seed (idea stage, friends/family/angels, < $1M), Seed (product development, angels/early VC, $1M-$3M), Series A (product-market fit, VC, $3M-$10M), Series B (scaling, $10M-$30M), Series C+ (expansion, $30M+), and finally IPO or acquisition as exit events.",
     "expected_keywords": [
       "pre-seed",
       "seed",
@@ -28,14 +28,46 @@
   },
   {
     "question_id": "Q03",
-    "question": "How do VCs calculate startup valuation and what is a cap table?",
-    "ground_truth_answer": "VCs use methods like Comparable Company Analysis, Discounted Cash Flow (DCF), and the Venture Capital Method (terminal value / expected return). A cap table (capitalization table) is a spreadsheet listing all shareholders, their ownership percentages, and equity types (common stock, preferred stock, options). It tracks dilution across rounds.",
+    "question": "What was the total amount of VC funding raised globally in Q1 2026?",
+    "ground_truth_answer": "In Q1 2026, VC-backed companies raised a total of $330.9 billion globally.",
     "expected_keywords": [
-      "valuation",
-      "cap table",
-      "dilution",
-      "preferred stock",
-      "DCF"
+      "$330.9 billion",
+      "330.9",
+      "330.9B"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q04",
+    "question": "How many VC deals were completed globally in Q1 2026?",
+    "ground_truth_answer": "There were 8,464 VC deals completed globally in Q1 2026.",
+    "expected_keywords": [
+      "8,464",
+      "8464 deals"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q05",
+    "question": "What is the difference between pre-money and post-money valuation?",
+    "ground_truth_answer": "Pre-money valuation is the agreed-upon value of a startup before it receives new investment capital. Post-money valuation is the pre-money valuation plus the new investment amount. For example, if a startup is valued at $4M pre-money and raises $1M, its post-money valuation is $5M.",
+    "expected_keywords": [
+      "pre-money",
+      "post-money",
+      "before",
+      "plus",
+      "investment amount"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q06",
+    "question": "Which sector dominated deal value and funding in the Q1 2026 report?",
+    "ground_truth_answer": "AI (Artificial Intelligence) dominated deal value and funding, with investments highly concentrated at the top through megadeals.",
+    "expected_keywords": [
+      "AI",
+      "Artificial Intelligence",
+      "megadeals"
     ],
     "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
   }

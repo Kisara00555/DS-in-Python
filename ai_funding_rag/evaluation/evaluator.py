@@ -523,6 +523,8 @@ class Evaluator:
                         f"AnsRel={record.answer_relevance_score:.2f} | "
                         f"RAG={record.rag_score:.2f}"
                     )
+                    # Proactively sleep to avoid Groq rate limits on free tier
+                    time.sleep(6)
                     break  # Success, exit retry loop
                 except Exception as e:
                     if "429" in str(e) or "rate_limit" in str(e).lower() or "Rate limit" in str(e):
