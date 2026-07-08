@@ -106,3 +106,5 @@ class Generator:
         self._history = [{"role": "system", "content": SYSTEM_PROMPT}]
         logger.info("Conversation history cleared.")
 
+
+# The generator enforces strict adherence to context to avoid LLM hallucinations during response generation.
