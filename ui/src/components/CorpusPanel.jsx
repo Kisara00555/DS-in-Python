@@ -199,3 +199,9 @@ export default function CorpusPanel({ status, onRefresh }) {
     </div>
   );
 }
+
+/**
+ * CorpusPanel:
+ * Manages PDF uploads, directory ingestions, and vector store reset capabilities.
+ * Tracks ingestion status and displays corpus statistics.
+ */
