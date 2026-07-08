@@ -81,3 +81,8 @@ export default function App() {
     </div>
   );
 }
+
+/**
+ * Main application shell containing Sidebar, StatusBar, and dynamic panel routing.
+ * Ensures global status polling and model configuration fetch.
+ */
