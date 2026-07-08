@@ -150,3 +150,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Ensure the vector store is populated before running full dataset evaluations to avoid zero-hit errors.
