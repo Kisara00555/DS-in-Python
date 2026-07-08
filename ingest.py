@@ -72,3 +72,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Note: Force mode will overwrite existing embeddings for the same file hashes.
