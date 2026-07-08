@@ -157,3 +157,5 @@ class SlidingWindowChunker(BaseChunker):
     def _sentence_split(text: str) -> List[str]:
         """Simple regex sentence splitter."""
         return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text) if s.strip()]
+
+# The overlap ensures that context spanning across chunk boundaries is not lost, maintaining semantic integrity for retrieval.
