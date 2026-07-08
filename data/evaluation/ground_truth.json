@@ -39,11 +39,13 @@
   },
   {
     "question_id": "Q04",
-    "question": "How many VC deals were completed globally in Q1 2026?",
-    "ground_truth_answer": "There were 8,464 VC deals completed globally in Q1 2026.",
+    "question": "How much VC investment did the Americas see in Q1 2026, and how much of that was from the US?",
+    "ground_truth_answer": "VC investment in the Americas reached a record high of $270.1 billion in Q1 2026, with the US accounting for $267.2 billion of that total.",
     "expected_keywords": [
-      "8,464",
-      "8464 deals"
+      "$270.1 billion",
+      "$267.2 billion",
+      "Americas",
+      "US"
     ],
     "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
   },
@@ -68,6 +70,78 @@
       "AI",
       "Artificial Intelligence",
       "megadeals"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q07",
+    "question": "According to the report's criteria, how is a 'growth' round defined for a startup?",
+    "ground_truth_answer": "A growth round is defined for companies that are at least seven years old and have raised at least six VC rounds, or are raising at Series E or later.",
+    "expected_keywords": [
+      "seven years old",
+      "six VC rounds",
+      "Series E"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q08",
+    "question": "Why do startups typically raise capital in multiple funding rounds instead of all at once?",
+    "ground_truth_answer": "Startups raise funding in rounds (Seed, Series A, etc.) to minimize equity dilution for the founders. As the company hits milestones and reduces risk, its valuation increases, allowing founders to sell less equity for the same amount of capital in subsequent rounds.",
+    "expected_keywords": [
+      "dilution",
+      "milestones",
+      "valuation",
+      "risk",
+      "equity"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q09",
+    "question": "How did the total global VC investment change from Q4 2025 to Q1 2026?",
+    "ground_truth_answer": "VC investment more than doubled, surging from $128.6 billion in Q4 2025 to $330.9 billion in Q1 2026.",
+    "expected_keywords": [
+      "$128.6 billion",
+      "$330.9 billion",
+      "doubled"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q10",
+    "question": "How does an IPO exit differ from an acquisition (M&A) exit strategy?",
+    "ground_truth_answer": "An IPO (Initial Public Offering) allows a private startup to go public by selling shares on a stock exchange, keeping the company independent. An acquisition (M&A) is when the startup is completely bought by another larger company, losing its independent status.",
+    "expected_keywords": [
+      "Initial Public Offering",
+      "stock exchange",
+      "acquisition",
+      "bought",
+      "independent"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q11",
+    "question": "Are unicorn financings strictly limited to first-time unicorn companies?",
+    "ground_truth_answer": "No, unicorn financings are not necessarily first-time financings; they also include further rounds raised by existing unicorns that maintain a valuation of at least $1 billion or more.",
+    "expected_keywords": [
+      "not necessarily first-time",
+      "existing unicorns",
+      "further rounds"
+    ],
+    "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+  },
+  {
+    "question_id": "Q12",
+    "question": "What does the term 'unicorn' refer to in the startup ecosystem?",
+    "ground_truth_answer": "A unicorn is a privately held startup company that has reached a valuation of over $1 billion. The term denotes the statistical rarity of such successful ventures.",
+    "expected_keywords": [
+      "privately held",
+      "startup",
+      "valuation",
+      "$1 billion",
+      "rarity"
     ],
     "source_pdf": "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
   }

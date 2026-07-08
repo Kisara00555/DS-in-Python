@@ -1,29 +1,29 @@
 {
-  "evaluated_at": "2026-07-07T19:53:24",
+  "evaluated_at": "2026-07-08T21:13:56",
   "summary": {
-    "total_questions": 6,
+    "total_questions": 12,
     "avg_context_relevance": 0.6833,
-    "avg_faithfulness": 0.65,
-    "avg_answer_relevance": 0.7667,
-    "avg_rag_score": 0.6573,
-    "pass_rate": 0.5
+    "avg_faithfulness": 0.75,
+    "avg_answer_relevance": 0.8917,
+    "avg_rag_score": 0.7598,
+    "pass_rate": 0.5833
   },
   "records": [
     {
       "question_id": "Q01",
       "question": "What is venture capital and how does it differ from angel investing?",
       "ground_truth": "Venture capital (VC) is institutional funding provided by VC firms to high-growth startups in exchange for equity. Angel investing is early-stage funding from individual investors (angels) using their personal capital. VC firms manage pooled funds from LPs (Limited Partners) and typically invest larger amounts at later stages, while angels invest earlier and smaller amounts.",
-      "system_answer": "Venture capital (VC) is institutional funding provided by VC firms to high-growth startups in exchange for equity (Source: startup_funding_guide.pdf). This is in contrast to angel investing, which typically involves funding from individual investors, such as friends, family, or angel investors, at the idea stage (Source: startup_funding_guide.pdf).\n\nThe key differences between venture capital and angel investing lie in the source of funding and the stage of the startup. Venture capital is typically provided by institutional investors, such as VC firms, to startups that have already demonstrated some level of growth and traction, whereas angel investing is often provided by individual investors to startups at the idea stage.\n\nIt's worth noting that the available corpus does not contain sufficient information on the specific characteristics or requirements of angel investing, such as the typical amount of funding provided or the types of startups that are most likely to receive angel investment.\n\nHowever, the context does provide some information on the characteristics of venture capital, including the fact that VC firms are highly selective in their funding decisions and focus on a smaller number of large-value deals (Source: kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).",
+      "system_answer": "Venture capital (VC) is institutional funding provided by VC firms to high-growth startups in exchange for equity (Source: startup_funding_guide.pdf, Page ?). This is in contrast to angel investing, which typically involves funding from friends, family, or individual investors at the idea stage (Source: startup_funding_guide.pdf, Page ?).\n\nIn other words, VC is a more formal and institutionalized form of funding, whereas angel investing is often more informal and personal. The startup_funding_guide.pdf document does not provide further details on the differences between VC and angel investing, but it does mention that VC firms provide funding to high-growth startups, which suggests that VC is typically associated with more mature and scalable businesses.\n\nIt's worth noting that the KPMG report (Source: kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?) does not explicitly discuss the differences between VC and angel investing. However, it does provide information on the characteristics of VC funds and the types of deals that are included in the report's data.",
       "context_relevance_score": 0.5,
-      "faithfulness_score": 0.8,
-      "answer_relevance_score": 0.9,
-      "rag_score": 0.6879,
-      "judge_reasoning": "The system answer is mostly faithful to the context, but some claims are not directly supported, and the answer is mostly relevant to the question, but could be more concise.",
+      "faithfulness_score": 0.5,
+      "answer_relevance_score": 0.8,
+      "rag_score": 0.5714,
+      "judge_reasoning": "The system answer partially addresses the question, but some claims are not fully supported by the retrieved context, and the context is partially relevant to the question.",
       "retrieved_sources": [
         "startup_funding_guide.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
-        "ai_index_report_2026.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
       ]
     },
@@ -31,12 +31,12 @@
       "question_id": "Q02",
       "question": "What are the typical stages of startup funding rounds?",
       "ground_truth": "Startup funding typically progresses through: Pre-seed (idea stage, friends/family/angels, < $1M), Seed (product development, angels/early VC, $1M-$3M), Series A (product-market fit, VC, $3M-$10M), Series B (scaling, $10M-$30M), Series C+ (expansion, $30M+), and finally IPO or acquisition as exit events.",
-      "system_answer": "The typical stages of startup funding rounds are as follows:\n\n1. **Pre-seed**: Rounds for companies founded less than two years ago that have not yet received institutional investor support (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n2. **Seed**: Rounds for companies that have received institutional investor support but have not yet received venture capital funding (The available corpus does not contain sufficient information on this topic).\n3. **Early-stage**: Rounds classified as Series A or B, typically aggregated together as early-stage, either by the series of stock issued in the financing or by a series of factors including the age of the company, prior financing history, company status, participating investors, and more (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n4. **Late-stage**: Rounds classified as Series C or D or later, either by the series of stock issued in the financing or by a series of factors including the age of the company, prior financing history, company status, participating investors, and more (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n5. **Growth**: Financings tagged as Series E or later or deals involving companies that are at least seven years old and have raised at least six VC rounds (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nNote that the available corpus does not contain sufficient information on the seed stage, and the startup funding guide only mentions the pre-seed stage as the idea stage, friends/family/angels, < 2 years old.",
+      "system_answer": "The typical stages of startup funding rounds, as defined in the provided context, are:\n\n1. **Pre-seed**: Rounds for companies founded less than two years ago that have not yet received institutional investor support (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n2. **Seed**: Rounds that typically follow the pre-seed stage, involving the first check from at least one institutional investor to fuel development growth (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n3. **Early-stage**: Rounds classified as Series A or B, typically aggregating together as early-stage, either by the series of stock issued in the financing or by factors such as the age of the company, prior financing history, company status, participating investors, and more (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n4. **Late-stage**: Rounds generally classified as Series C or D or later, or deals involving companies that are at least seven years old and have raised at least six VC rounds (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThe available corpus does not contain sufficient information on the specific characteristics of each stage or the typical funding amounts associated with each stage.",
       "context_relevance_score": 0.8,
       "faithfulness_score": 0.7,
       "answer_relevance_score": 0.9,
       "rag_score": 0.7916,
-      "judge_reasoning": "The system answer is mostly relevant to the question, but some claims are not fully supported by the retrieved context, and it partially addresses the question, but with some minor inaccuracies.",
+      "judge_reasoning": "The system answer is mostly relevant to the question, but some details are not fully supported by the retrieved context, and it directly addresses the question with some minor omissions.",
       "retrieved_sources": [
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
@@ -49,12 +49,12 @@
       "question_id": "Q03",
       "question": "What was the total amount of VC funding raised globally in Q1 2026?",
       "ground_truth": "In Q1 2026, VC-backed companies raised a total of $330.9 billion globally.",
-      "system_answer": "The total amount of VC funding raised globally in Q1 2026 was $330.9 billion (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nThis information is mentioned in the context as a key finding in the Q1'26 edition of KPMG Private Enterprise's Venture Pulse report, highlighting the major trends, opportunities, and challenges across the venture capital market globally and in key jurisdictions around the world (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nIt is also noted that this total soared past the record set in Q4'21 ($210.8 billion) and was largely driven by a handful of multi-billion-dollar raises by AI-focused companies (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nThe available corpus does not contain sufficient information on the breakdown of VC funding by stage or the specific companies that received funding in Q1 2026.",
-      "context_relevance_score": 1.0,
-      "faithfulness_score": 1.0,
+      "system_answer": "The total amount of VC funding raised globally in Q1 2026 was $330.9 billion (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThis information is also mentioned in other parts of the report, such as [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?, which states that global VC investment more than doubled quarter-over-quarter, rising from $128.6 billion in Q4'25 to $330.9 billion during Q1'26.\n\nAdditionally, [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ? mentions that the total soared past the record set in Q4'21 ($210.8 billion) — a quarter once viewed as a nearly unmatchable outlier.\n\nThe available corpus does not contain sufficient information on the breakdown of VC funding by stage or the typical funding amounts associated with each stage.",
+      "context_relevance_score": 0.9,
+      "faithfulness_score": 0.9,
       "answer_relevance_score": 1.0,
-      "rag_score": 1.0,
-      "judge_reasoning": "The system answer is fully supported by the retrieved context, directly addresses the question, and all factual claims are explicitly present in the context.",
+      "rag_score": 0.931,
+      "judge_reasoning": "The system answer is well-supported by the retrieved context, directly addresses the question, and is mostly relevant, but slightly lacks specificity in the context relevance score due to the presence of some tangential information.",
       "retrieved_sources": [
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
@@ -65,14 +65,14 @@
     },
     {
       "question_id": "Q04",
-      "question": "How many VC deals were completed globally in Q1 2026?",
-      "ground_truth": "There were 8,464 VC deals completed globally in Q1 2026.",
-      "system_answer": "The available corpus does not contain sufficient information on the number of VC deals completed globally in Q1 2026.\n\nHowever, it does mention that the global VC market got off to a positive start in Q1'26, driven by growing investor optimism and the possibility of an improved IPO environment coming out of 2025 (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nAdditionally, it highlights that the current surge in VC funding was largely driven by a handful of multi-billion-dollar raises by AI-focused companies, with five US-based companies together accounting for $188.6 billion of total global VC investment (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nIt also mentions that the US accounted for $267.2 billion of VC investment in the Americas during the quarter, including all ten of the largest deals (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nHowever, the specific number of VC deals completed globally in Q1 2026 is not mentioned in the provided context.",
-      "context_relevance_score": 0.5,
-      "faithfulness_score": 0.0,
-      "answer_relevance_score": 0.0,
-      "rag_score": 0.0,
-      "judge_reasoning": "The system failed to provide a relevant answer, as it did not attempt to extract the number of VC deals from the context, and instead provided a generic statement about the global VC market.",
+      "question": "How much VC investment did the Americas see in Q1 2026, and how much of that was from the US?",
+      "ground_truth": "VC investment in the Americas reached a record high of $270.1 billion in Q1 2026, with the US accounting for $267.2 billion of that total.",
+      "system_answer": "The Americas saw a record high of $270.1 billion in VC investment in Q1 2026 (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). The US accounted for $267.2 billion of VC investment in the Americas during the quarter, including all ten of the largest deals (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThis means that the US accounted for approximately 99% of the VC investment in the Americas in Q1 2026, with the remaining 1% attributed to other countries in the Americas.\n\nIt's worth noting that the report highlights the significant surge in VC investment in the US, driven primarily by activity in the AI space, with large funding rounds by LLM players OpenAI ($122 billion), Anthropic ($30.6 billion), and xAI ($20 billion) (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).",
+      "context_relevance_score": 0.8,
+      "faithfulness_score": 0.9,
+      "answer_relevance_score": 1.0,
+      "rag_score": 0.8926,
+      "judge_reasoning": "The system answer is mostly relevant to the question, with some minor inaccuracies in the exact figures, but it directly addresses the question and is grounded in the retrieved context.",
       "retrieved_sources": [
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
@@ -85,12 +85,12 @@
       "question_id": "Q05",
       "question": "What is the difference between pre-money and post-money valuation?",
       "ground_truth": "Pre-money valuation is the agreed-upon value of a startup before it receives new investment capital. Post-money valuation is the pre-money valuation plus the new investment amount. For example, if a startup is valued at $4M pre-money and raises $1M, its post-money valuation is $5M.",
-      "system_answer": "Pre-money valuation is the agreed-upon value of a startup before it receives new investment capital (Source: [1] startup_funding_guide.pdf). This is in contrast to post-money valuation, which is the value of the startup after it receives new investment capital.\n\nTo calculate post-money valuation, you add the new investment capital to the pre-money valuation (Source: [1] startup_funding_guide.pdf). For example, if a startup has a pre-money valuation of $10 million and receives $5 million in new investment capital, its post-money valuation would be $15 million.\n\nThe available corpus does not contain sufficient information on the specific formula or calculation for post-money valuation. However, it does mention that pre-money valuation is typically used to determine the ownership percentage of investors and founders in a startup (Source: [1] startup_funding_guide.pdf).\n\nIt's worth noting that the context does not provide a clear explanation of the difference between pre-money and post-money valuation, but rather mentions them as separate concepts.",
+      "system_answer": "Pre-money valuation is the agreed-upon value of a startup before it receives new investment capital (Source: [1] startup_funding_guide.pdf, Page ?).\n\nPost-money valuation, on the other hand, is not explicitly defined in the provided context. However, it can be inferred that post-money valuation refers to the value of a startup after it receives new investment capital.\n\nThe available corpus does not contain sufficient information on the exact relationship between pre-money and post-money valuation, such as how to calculate post-money valuation or the typical differences between the two.\n\nIt's worth noting that the context does mention that pre-money valuation is typically used in the context of startup funding, and that post-money valuation is not explicitly defined in the provided context.",
       "context_relevance_score": 0.5,
       "faithfulness_score": 0.5,
       "answer_relevance_score": 0.8,
       "rag_score": 0.5714,
-      "judge_reasoning": "The system answer partially addresses the question, but the retrieved context is only partially relevant and the system answer contains some factual claims not explicitly present in the context.",
+      "judge_reasoning": "The system answer partially addresses the question, but fails to accurately define post-money valuation and its relationship with pre-money valuation, and some claims are not fully supported by the retrieved context.",
       "retrieved_sources": [
         "startup_funding_guide.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
@@ -103,18 +103,126 @@
       "question_id": "Q06",
       "question": "Which sector dominated deal value and funding in the Q1 2026 report?",
       "ground_truth": "AI (Artificial Intelligence) dominated deal value and funding, with investments highly concentrated at the top through megadeals.",
-      "system_answer": "The sector that dominated deal value and funding in the Q1 2026 report was AI-focused companies (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf). This is mentioned in the context as the primary driver of the current surge in VC funding, with a handful of multi-billion-dollar raises by AI-focused companies contributing to the record-breaking total of $330.9 billion in global VC investment (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nAdditionally, it is noted that five US-based companies together accounted for $188.6 billion of total global VC investment, with all ten of the largest deals in the Americas during the quarter being in the US (Source: [2] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf).\n\nThe available corpus does not contain sufficient information on the specific sectors that dominated deal value and funding in the Q1 2026 report beyond AI-focused companies.",
+      "system_answer": "The sector that dominated deal value and funding in the Q1 2026 report was AI (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThis is evident from the fact that the current surge in VC funding was largely driven by a handful of multi-billion-dollar raises by AI-focused companies (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). Specifically, the report mentions that OpenAI raised $122 billion, Anthropic raised $30.6 billion, xAI raised $20 billion, and Waymo raised $16 billion, all of which are AI-related companies (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nAdditionally, the report highlights that the VC investment in the US soared to a record high of $267.2 billion in Q1'26, with the largest number of $10 billion+ VC megadeals in the US ever, all of which were in the AI sector (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThe available corpus does not contain sufficient information on the specific deal value and funding amounts for other sectors, such as biotech, defense tech, or space and aviation.",
       "context_relevance_score": 0.8,
       "faithfulness_score": 0.9,
       "answer_relevance_score": 1.0,
       "rag_score": 0.8926,
-      "judge_reasoning": "The system answer is mostly grounded in the retrieved context, with some minor omissions, and directly addresses the question, but the context relevance score is lower due to some off-topic chunks.",
+      "judge_reasoning": "The system answer is mostly grounded in the retrieved context, with some minor omissions, and directly addresses the question, but with a slight overemphasis on AI megadeals.",
       "retrieved_sources": [
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
-        "startup_funding_guide.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
         "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    },
+    {
+      "question_id": "Q07",
+      "question": "According to the report's criteria, how is a 'growth' round defined for a startup?",
+      "ground_truth": "A growth round is defined for companies that are at least seven years old and have raised at least six VC rounds, or are raising at Series E or later.",
+      "system_answer": "According to the report, a 'growth' round is defined as a financial investment occurring when a PE investor acquires a minority stake in a privately held corporation (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nHowever, as of the Q4 2022 edition, a new stage for venture that was invented by PitchBook to account for growth at late-stage VC will be included, defined as venture growth (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nIt's worth noting that PitchBook defines VC funds as pools of capital raised for the purpose of investing in the equity of startup companies, and funds identifying as growth stage vehicles are classified as PE funds and are not included in this report (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThe available corpus does not contain sufficient information on the specific characteristics of a 'growth' round, such as the typical funding amounts or the types of companies that typically receive growth rounds.",
+      "context_relevance_score": 0.5,
+      "faithfulness_score": 0.5,
+      "answer_relevance_score": 0.5,
+      "rag_score": 0.5,
+      "judge_reasoning": "The system answer partially addresses the question, but the retrieved context is only partially relevant and the system answer contains some factual claims not explicitly present in the context.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "startup_funding_guide.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "ai_index_report_2026.pdf",
+        "ai_index_report_2026.pdf"
+      ]
+    },
+    {
+      "question_id": "Q08",
+      "question": "Why do startups typically raise capital in multiple funding rounds instead of all at once?",
+      "ground_truth": "Startups raise funding in rounds (Seed, Series A, etc.) to minimize equity dilution for the founders. As the company hits milestones and reduces risk, its valuation increases, allowing founders to sell less equity for the same amount of capital in subsequent rounds.",
+      "system_answer": "Startups typically raise capital in multiple funding rounds instead of all at once because it allows them to:\n\n1. **Test market demand and validate their business model** (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). By raising capital in multiple rounds, startups can gauge the market's response to their product or service and make adjustments before seeking additional funding.\n2. **Demonstrate traction and growth** (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). Multiple funding rounds provide an opportunity for startups to showcase their progress, milestones, and achievements, making it easier to attract subsequent investors.\n3. **Build a strong foundation and prepare for scale** (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). By raising capital in multiple rounds, startups can establish a solid foundation, develop a robust business model, and prepare for rapid growth and expansion.\n4. **Attract investors who believe in their vision and are willing to take on more risk** (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). Multiple funding rounds allow startups to attract investors who are more aligned with their vision and are willing to take on more risk, which can lead to more favorable terms and a stronger partnership.\n\nThe available corpus does not contain sufficient information on the specific characteristics of each funding round or the typical funding amounts associated with each round.",
+      "context_relevance_score": 0.5,
+      "faithfulness_score": 0.5,
+      "answer_relevance_score": 0.8,
+      "rag_score": 0.5714,
+      "judge_reasoning": "The system answer partially addresses the question, but some claims are not directly supported by the retrieved context, and the context is only partially relevant to the question.",
+      "retrieved_sources": [
+        "startup_funding_guide.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    },
+    {
+      "question_id": "Q09",
+      "question": "How did the total global VC investment change from Q4 2025 to Q1 2026?",
+      "ground_truth": "VC investment more than doubled, surging from $128.6 billion in Q4 2025 to $330.9 billion in Q1 2026.",
+      "system_answer": "The total global VC investment changed from $128.6 billion in Q4 2025 to $330.9 billion in Q1 2026, more than doubling quarter-over-quarter (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThis represents a significant increase, surpassing the previous record set in Q4 2021 ($210.8 billion) (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThe surge in VC funding was largely driven by a handful of multi-billion-dollar raises by AI-focused companies (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThe available corpus does not contain sufficient information on the specific factors contributing to this increase or the impact of the unanticipated conflict in the Middle East on the VC market.",
+      "context_relevance_score": 0.8,
+      "faithfulness_score": 0.9,
+      "answer_relevance_score": 1.0,
+      "rag_score": 0.8926,
+      "judge_reasoning": "The system answer is mostly grounded in the retrieved context, with some minor omissions, and directly addresses the question, but with a slight overemphasis on the AI-driven surge.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "question": "How does an IPO exit differ from an acquisition (M&A) exit strategy?",
+      "ground_truth": "An IPO (Initial Public Offering) allows a private startup to go public by selling shares on a stock exchange, keeping the company independent. An acquisition (M&A) is when the startup is completely bought by another larger company, losing its independent status.",
+      "system_answer": "An IPO (Initial Public Offering) exit differs from an acquisition (M&A) exit strategy in the following ways:\n\n1. **Definition**: An IPO exit refers to the process of a company going public by issuing shares to the public for the first time (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). An M&A exit, on the other hand, refers to the acquisition of a company by another entity, resulting in the majority of the equity being transferred (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n2. **Methodology**: The methodology for tracking IPO exits has changed over time, with PitchBook now using the pre-money valuation of the company at its IPO price (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?). M&A exit values are based on reported or disclosed figures, with no estimation used to assess the value of transactions for which the actual deal size is unknown (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n3. **Types of public listings**: IPO exits now include all types of public listings, including SPACs (Special Purpose Acquisition Companies) and other reverse mergers (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n4. **Exit value**: The exit value for an IPO is based on the pre-money valuation of the company at its IPO price, whereas the exit value for an M&A is based on the reported or disclosed figures of the transaction (Source: [5] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThe available corpus does not contain sufficient information on the specific differences between IPO and M&A exits in terms of the companies' financial performance, growth prospects, or the investors' motivations.",
+      "context_relevance_score": 0.5,
+      "faithfulness_score": 0.8,
+      "answer_relevance_score": 0.9,
+      "rag_score": 0.6879,
+      "judge_reasoning": "The system answer is mostly relevant to the question, but some of the retrieved chunks are off-topic, and while the answer is well-supported by the context, it includes some minor factual inaccuracies and omissions.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    },
+    {
+      "question_id": "Q11",
+      "question": "Are unicorn financings strictly limited to first-time unicorn companies?",
+      "ground_truth": "No, unicorn financings are not necessarily first-time financings; they also include further rounds raised by existing unicorns that maintain a valuation of at least $1 billion or more.",
+      "system_answer": "No, unicorn financings are not strictly limited to first-time unicorn companies (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nAccording to the context, PitchBook defines a unicorn venture financing as a VC round that generates a post-money valuation of $1 billion or more. These are not necessarily first-time unicorn financing rounds, but also include further rounds raised by existing unicorns that maintain at least that valuation of $1 billion or more (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThis means that unicorn financings can occur in subsequent rounds, not just in the initial round that takes a company's valuation above $1 billion.",
+      "context_relevance_score": 0.8,
+      "faithfulness_score": 1.0,
+      "answer_relevance_score": 1.0,
+      "rag_score": 0.9231,
+      "judge_reasoning": "The system answer accurately reflects the retrieved context and directly addresses the question, with all factual claims supported by the context.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf"
+      ]
+    },
+    {
+      "question_id": "Q12",
+      "question": "What does the term 'unicorn' refer to in the startup ecosystem?",
+      "ground_truth": "A unicorn is a privately held startup company that has reached a valuation of over $1 billion. The term denotes the statistical rarity of such successful ventures.",
+      "system_answer": "In the startup ecosystem, the term 'unicorn' refers to a company that has reached a valuation of $1 billion or more (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThis definition is provided by PitchBook, which defines a unicorn venture financing as a VC round that generates a post-money valuation of $1 billion or more (Source: [1] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nThe available corpus does not contain sufficient information on the origin of the term 'unicorn' or its historical context in the startup ecosystem.\n\nHowever, it is worth noting that the term 'unicorn' is used to describe companies that have achieved a significant milestone in terms of valuation, and it is often used to highlight the success of startups in the tech industry (Source: [3] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).\n\nAdditionally, the context mentions that the Americas saw 66 new unicorn births in Q1'26, with AI-focused companies accounting for a large share of these new unicorns (Source: [4] kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf, Page ?).",
+      "context_relevance_score": 0.8,
+      "faithfulness_score": 0.9,
+      "answer_relevance_score": 1.0,
+      "rag_score": 0.8926,
+      "judge_reasoning": "The system answer is mostly grounded in the retrieved context, with some minor omissions, and directly addresses the question, but could benefit from more precise definitions and historical context.",
+      "retrieved_sources": [
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "ai_index_report_2026.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "kpmg-private-enterprise-venture-pulse-q1-26-global-report.pdf",
+        "ai_index_report_2026.pdf"
       ]
     }
   ]
