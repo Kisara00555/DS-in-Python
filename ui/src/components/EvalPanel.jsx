@@ -189,3 +189,8 @@ function ScoreCell({ val, bold }) {
     </span>
   );
 }
+
+/**
+ * EvalPanel:
+ * Triggers RAG triad evaluation pipelines and renders the resulting scores and reasoning.
+ */
