@@ -149,3 +149,5 @@ class ChromaVectorStore(BaseVectorStore):
             metadata={"hnsw:space": "cosine"},
         )
         logger.warning("Vector store collection '%s' cleared and recreated.", collection_name)
+
+# Data is persisted to the local directory defined in settings to ensure the corpus is maintained between runs.
