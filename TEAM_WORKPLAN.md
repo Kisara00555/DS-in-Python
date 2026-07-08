@@ -135,7 +135,7 @@ cd ui && npm install && cd ..
 
 ## 👤 MEMBER 3 — Evaluation Framework & Ground Truth
 
-**Role:** You own the quality measurement of the system. You define how good the RAG is and you prove it with numbers.
+**Role:** You own the quality measurement of the system. You define how good the RAG is and you prove it with numbers. You are also responsible for the 5-Min Video Demonstration.
 **Branch:** `member3/evaluation`
 
 ### Your Files (primary responsibility)
@@ -172,7 +172,7 @@ cd ui && npm install && cd ..
 | **Day 7** | In `evaluate.py`, add a `--question` CLI flag so you can evaluate a single question: `python evaluate.py --question "What is a SAFE note?"` | `feat(m3/cli): add --question flag for single-question evaluation` |
 | **Day 8** | Run evaluation with the new PDFs Member 1 added. Analyse which questions score lowest and why. Write your analysis as a comment block in `evaluate.py` | `docs(m3): add score analysis comments for new corpus questions` |
 | **Day 9** | Write full docstrings for every public class and method in `evaluator.py` | `docs(m3): full docstrings for entire evaluator module` |
-| **Day 10** | Generate the final evaluation run to be submitted. Commit both `results.json` and `report.html` | `data(m3): final evaluation results - results.json and report.html committed` |
+| **Day 10** | Record the 5-minute video demo (screen recording). Upload to YouTube as Unlisted. Add the YouTube link to `README.md` and `REPORT.md`. | `docs(m3): add YouTube demo link to README and REPORT` |
 
 ### Definition of Done
 
@@ -183,12 +183,13 @@ cd ui && npm install && cd ..
 - [ ] All Q&A pairs have a `"source_pdf"` field
 - [ ] Final `results.json` and `report.html` committed
 - [ ] All public methods have docstrings
+- [ ] YouTube demo link is in both README and REPORT
 
 ---
 
 ## 👤 MEMBER 4 — React UI, Report & Documentation
 
-**Role:** You own the user interface, the README, and the formal academic report. You are the face of the project.
+**Role:** You own the user interface, the README, and the formal academic Technical Report. You are the face of the project.
 **Branch:** `member4/ui-docs`
 
 ### Your Files (primary responsibility)
@@ -227,7 +228,7 @@ cd ui && npm install && cd ..
 | **Day 7** | Write the first 3 sections of the academic report. Save as `REPORT.md`. Commit a first draft. | `docs(m4): first draft REPORT.md - sections I, II, III` |
 | **Day 8** | Write sections IV, V, VI of the report. Use the actual evaluation scores from Member 3's `results.json`. | `docs(m4): complete REPORT.md - sections IV, V, VI with real scores` |
 | **Day 9** | Final polish of the report: word count check (~3,000 words), fix grammar, add bibliography (cite the 4+ source PDFs). | `docs(m4): REPORT.md final polish, bibliography, word count confirmed` |
-| **Day 10** | Record the 5-minute video demo (screen recording). Upload to YouTube as Unlisted. Add the YouTube link to `README.md` and `REPORT.md`. | `docs(m4): add YouTube demo link to README and REPORT` |
+| **Day 10** | Finalize the academic report ensuring all technical details are accurately documented. | `docs(m4): final technical report completion` |
 
 ### Definition of Done
 
@@ -235,9 +236,8 @@ cd ui && npm install && cd ..
 - [ ] About panel shows team member names
 - [ ] Copy button works on chat messages
 - [ ] Download JSON works in EvalPanel
-- [ ] README has: actual GitHub URL, team names, screenshots, YouTube link
+- [ ] README has: actual GitHub URL, team names, screenshots
 - [ ] `REPORT.md` is ~3,000 words with all 6 sections
-- [ ] YouTube demo link is in both README and REPORT
 
 ---
 
