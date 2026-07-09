@@ -75,7 +75,7 @@ cd ui && npm install && cd ..
 
 - [ ] `python ingest.py` runs without errors
 - [ ] At least 5 PDFs in `data/pdfs/`
-- [ ] At least 20 Q&A pairs in `ground_truth.json`
+- [ ] At least 12 Q&A pairs in `ground_truth.json`
 - [ ] All methods have docstrings
 - [ ] No chunk shorter than 50 chars is stored
 - [ ] Zero-page PDF raises `ValueError`
