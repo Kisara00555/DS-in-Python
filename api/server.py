@@ -208,7 +208,7 @@ def chat(req: ChatRequest):
 def reset_conversation():
     """Clear the agent's multi-turn conversation history."""
     try:
-        get_agent().reset_conversation()
+        get_agent().clear_history()
         return {"message": "Conversation history cleared."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
