@@ -172,6 +172,15 @@ All six packages should show a `Name:` and `Version:` — if any say *"not found
 
 *(Note: You must have [Node.js](https://nodejs.org/) installed on your computer first. If you don't, the `npm` command will give an error!)*
 
+Check if Node.js and npm are installed:
+
+```bash
+node -v
+npm -v
+```
+
+If these commands return version numbers, you are good to go. Now install the dependencies:
+
 ```bash
 cd ui
 npm install
