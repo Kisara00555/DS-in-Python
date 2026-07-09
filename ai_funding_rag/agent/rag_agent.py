@@ -148,7 +148,7 @@ class RAGAgent:
 
         return result
 
-    def reset_conversation(self) -> None:
+    def clear_history(self) -> None:
         """Reset the generator's conversation history."""
         self._generator.reset_history()
 
