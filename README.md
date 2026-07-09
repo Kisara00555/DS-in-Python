@@ -170,6 +170,8 @@ All six packages should show a `Name:` and `Version:` — if any say *"not found
 
 **Install React UI dependencies:**
 
+*(Note: You must have [Node.js](https://nodejs.org/) installed on your computer first. If you don't, the `npm` command will give an error!)*
+
 ```bash
 cd ui
 npm install
