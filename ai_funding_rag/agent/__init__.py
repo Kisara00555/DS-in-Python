@@ -1,4 +1,5 @@
-"""agent package"""
+"""RAG agent — retriever, generator, prompt templates, and agentic loop orchestrator."""
+
 from .rag_agent import RAGAgent
 from .generator import GenerationResult, Generator
 from .retriever import Retriever, RetrievalTrace

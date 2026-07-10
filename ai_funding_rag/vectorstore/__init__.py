@@ -1,4 +1,5 @@
-"""vectorstore package"""
+"""Vector store — embedding models and persistent ChromaDB storage."""
+
 from .embedder import BaseEmbedder, LocalEmbedder
 from .store import BaseVectorStore, ChromaVectorStore, RetrievedChunk
 

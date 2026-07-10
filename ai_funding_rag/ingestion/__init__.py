@@ -1,4 +1,5 @@
-"""ingestion package"""
+"""Ingestion pipeline — PDF loading, text extraction, and chunking."""
+
 from .pdf_loader import BaseLoader, DocumentPage, PyMuPDFLoader
 from .chunker import BaseChunker, SlidingWindowChunker, TextChunk
 
