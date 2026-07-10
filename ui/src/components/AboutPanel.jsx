@@ -86,7 +86,7 @@ export default function AboutPanel() {
           <a
             href="https://github.com/Kisara00555/DS-in-Python"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="btn btn-primary"
             id="btn-github-link"
           > 
