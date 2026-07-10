@@ -81,7 +81,7 @@ def main() -> None:
             print("Goodbye! 👋")
             break
         elif user_input.lower() == "reset":
-            agent.reset_conversation()
+            agent.clear_history()
             print("✅  Conversation history cleared.\n")
             continue
         elif user_input.lower() == "corpus":
