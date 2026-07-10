@@ -26,7 +26,9 @@ copy .env.example .env
 # Open .env and paste your GROQ_API_KEY
 
 # 5. Install frontend dependencies
-cd ui && npm install && cd ..
+cd ui
+npm install
+cd ..
 ```
 
 > **Git workflow rule:** Each person works on their own branch, raises a pull request to `main`, and the team leader reviews and merges.
