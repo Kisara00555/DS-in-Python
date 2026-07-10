@@ -187,6 +187,7 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
             onKeyDown={handleKeyDown}
             disabled={loading || notReady}
             rows={2}
+            autoFocus
           />
           <button
             id="btn-send"
