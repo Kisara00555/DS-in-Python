@@ -137,7 +137,7 @@ start_app.py                     # Launch API + UI together
 ### 1. Clone & set up environment
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Kisara00555/DS-in-Python.git
 cd "DS Coursework"
 ```
 
@@ -290,7 +290,7 @@ The system is evaluated using the **RAG Triad** framework (TruEra), which measur
 
 The **aggregate RAG Score** is the harmonic mean of all three, which ensures a single weak leg drags down the overall score.
 
-The evaluation runs against **15 domain-specific ground-truth QA pairs** covering:
+The evaluation runs against **12 domain-specific ground-truth QA pairs** covering:
 - Funding stages & instruments (SAFE, term sheets)
 - Valuation mechanics (pre/post-money, dilution)
 - VC decision criteria
