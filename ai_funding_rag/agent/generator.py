@@ -9,9 +9,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import List
-
-from typing import List, Dict
+from typing import Dict, List
 
 import groq
 
