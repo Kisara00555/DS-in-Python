@@ -124,7 +124,7 @@ start_app.py                     # Launch API + UI together
 
 ## 🎥 Demo Video
 
-[▶️ Watch our 5-minute unlisted YouTube Demo here!](https://youtube.com/watch?v=REPLACE_ME)
+[▶️ Watch our 5-minute unlisted YouTube Demo here!](https://youtu.be/UMM4rQmEEHE)
 
 ---
 
