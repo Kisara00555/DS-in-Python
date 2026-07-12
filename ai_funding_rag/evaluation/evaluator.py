@@ -1,7 +1,7 @@
 """
 evaluation/evaluator.py
 -----------------------
-RAG Triad evaluation framework.
+RAG Triad evaluation framework with extended metrics.
 
 The RAG Triad (coined by TruEra/TruLens) measures three orthogonal dimensions
 of RAG quality in a single evaluation pass:
@@ -9,6 +9,16 @@ of RAG quality in a single evaluation pass:
   1. Context Relevance   – Were the retrieved chunks relevant to the question?
   2. Faithfulness        – Is the answer grounded in the retrieved context?
   3. Answer Relevance    – Does the answer actually address the question asked?
+
+Extended deterministic metrics (added for DS205.3 evaluation):
+
+  4. Keyword Precision   – Of the expected keywords found, how accurately does
+                           the system reproduce them?
+  5. Keyword Recall      – What fraction of expected keywords appear in the answer?
+  6. F1 Score            – Harmonic mean of precision and recall.
+  7. Cosine Similarity   – Semantic similarity between the ground-truth answer
+                           and the system-generated answer (using the same
+                           embedding model as the retrieval pipeline).
 
 Uses an LLM-as-judge approach against a structured ground-truth dataset.
 Results are saved as both JSON (machine-readable) and HTML (human-readable proof).
@@ -25,6 +35,7 @@ from pathlib import Path
 from typing import List, Optional
 
 import groq
+import numpy as np
 
 from ..config.settings import Settings
 
@@ -46,12 +57,19 @@ class GroundTruthItem:
 @dataclass
 class EvaluationRecord:
     """
-    Result of evaluating a single question across the full RAG Triad.
+    Result of evaluating a single question across the full RAG Triad
+    plus extended keyword and semantic similarity metrics.
 
     RAG Triad scores (all 0.0–1.0):
       context_relevance  – retrieved chunks relevant to the question?
       faithfulness       – answer grounded in the retrieved context?
       answer_relevance   – answer addresses the question?
+
+    Extended metrics (all 0.0–1.0):
+      precision          – keyword precision (expected keywords found in answer)
+      recall             – keyword recall (coverage of expected keywords)
+      f1_score           – harmonic mean of precision and recall
+      cosine_similarity  – semantic similarity between ground-truth and system answer
     """
 
     question_id: str
@@ -62,6 +80,11 @@ class EvaluationRecord:
     faithfulness_score: float        # RAG Triad leg 2
     answer_relevance_score: float    # RAG Triad leg 3
     judge_reasoning: str
+    # Extended metrics
+    precision: float = 0.0
+    recall: float = 0.0
+    f1_score: float = 0.0
+    cosine_similarity: float = 0.0
     retrieved_sources: List[str] = field(default_factory=list)
 
     @property
@@ -80,7 +103,7 @@ class EvaluationRecord:
 
 @dataclass
 class EvaluationReport:
-    """Aggregated RAG Triad evaluation report."""
+    """Aggregated RAG Triad evaluation report with extended metrics."""
 
     records: List[EvaluationRecord]
     avg_context_relevance: float
@@ -88,6 +111,11 @@ class EvaluationReport:
     avg_answer_relevance: float
     avg_rag_score: float
     total_questions: int
+    # Extended metric averages
+    avg_precision: float = 0.0
+    avg_recall: float = 0.0
+    avg_f1_score: float = 0.0
+    avg_cosine_similarity: float = 0.0
     evaluated_at: str = field(default_factory=lambda: datetime.now().isoformat(timespec="seconds"))
 
     def to_dict(self) -> dict:
@@ -106,6 +134,10 @@ class EvaluationReport:
                 "avg_answer_relevance": round(self.avg_answer_relevance, 4),
                 "avg_rag_score": round(self.avg_rag_score, 4),
                 "pass_rate": round(self.pass_rate, 4),
+                "avg_precision": round(self.avg_precision, 4),
+                "avg_recall": round(self.avg_recall, 4),
+                "avg_f1_score": round(self.avg_f1_score, 4),
+                "avg_cosine_similarity": round(self.avg_cosine_similarity, 4),
             },
             "records": [
                 {
@@ -117,6 +149,10 @@ class EvaluationReport:
                     "faithfulness_score": r.faithfulness_score,
                     "answer_relevance_score": r.answer_relevance_score,
                     "rag_score": round(r.rag_score, 4),
+                    "precision": round(r.precision, 4),
+                    "recall": round(r.recall, 4),
+                    "f1_score": round(r.f1_score, 4),
+                    "cosine_similarity": round(r.cosine_similarity, 4),
                     "judge_reasoning": r.judge_reasoning,
                     "retrieved_sources": r.retrieved_sources,
                 }
@@ -190,6 +226,10 @@ class EvaluationReport:
               <td class="score">{score_badge(r.faithfulness_score)}</td>
               <td class="score">{score_badge(r.answer_relevance_score)}</td>
               <td class="score">{score_badge(r.rag_score)}</td>
+              <td class="score">{score_badge(r.precision)}</td>
+              <td class="score">{score_badge(r.recall)}</td>
+              <td class="score">{score_badge(r.f1_score)}</td>
+              <td class="score">{score_badge(r.cosine_similarity)}</td>
               <td class="reasoning">{r.judge_reasoning}</td>
             </tr>"""
 
@@ -198,7 +238,7 @@ class EvaluationReport:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RAG Triad Evaluation Report – AI Funding Assistant</title>
+  <title>RAG Evaluation Report – AI Funding Assistant</title>
   <style>
     :root {{
       --bg: #0f172a; --surface: #1e293b; --border: #334155;
@@ -212,13 +252,13 @@ class EvaluationReport:
     .meta {{ color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }}
 
     /* Summary cards */
-    .cards {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr));
+    .cards {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
               gap: 1rem; margin-bottom: 2.5rem; }}
     .card {{ background: var(--surface); border: 1px solid var(--border);
              border-radius: 12px; padding: 1.25rem; text-align: center; }}
-    .card-label {{ font-size: 0.78rem; text-transform: uppercase; letter-spacing: .06em;
+    .card-label {{ font-size: 0.72rem; text-transform: uppercase; letter-spacing: .06em;
                    color: var(--muted); margin-bottom: 0.5rem; }}
-    .card-value {{ font-size: 2rem; font-weight: 700; }}
+    .card-value {{ font-size: 1.75rem; font-weight: 700; }}
     .card-value.green {{ color: #22c55e; }}
     .card-value.amber {{ color: #f59e0b; }}
     .card-value.red   {{ color: #ef4444; }}
@@ -228,26 +268,30 @@ class EvaluationReport:
     .legend-item {{ display: flex; align-items: center; gap: 0.4rem; }}
     .dot {{ width: 10px; height: 10px; border-radius: 50%; }}
 
+    /* Section headers */
+    .section-header {{ font-size: 1.1rem; font-weight: 600; margin: 2rem 0 1rem;
+                       color: var(--accent); }}
+
     /* Table */
     .table-wrap {{ overflow-x: auto; }}
     table {{ width: 100%; border-collapse: collapse; background: var(--surface);
              border-radius: 12px; overflow: hidden; }}
     thead {{ background: #273548; }}
-    th {{ padding: 0.85rem 1rem; text-align: left; font-size: 0.78rem;
+    th {{ padding: 0.85rem 0.6rem; text-align: left; font-size: 0.72rem;
           text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }}
-    td {{ padding: 0.85rem 1rem; border-top: 1px solid var(--border);
-          vertical-align: top; font-size: 0.88rem; }}
+    td {{ padding: 0.85rem 0.6rem; border-top: 1px solid var(--border);
+          vertical-align: top; font-size: 0.85rem; }}
     tr:hover td {{ background: rgba(99,102,241,.06); }}
     .qid {{ font-weight: 700; color: var(--accent); white-space: nowrap; }}
-    .question {{ max-width: 280px; }}
+    .question {{ max-width: 220px; }}
     .score {{ text-align: center; white-space: nowrap; }}
-    .reasoning {{ color: var(--muted); font-size: 0.8rem; max-width: 260px; }}
+    .reasoning {{ color: var(--muted); font-size: 0.78rem; max-width: 220px; }}
 
-    /* Triad explanation */
+    /* Triad + metrics explanation */
     .triad {{ background: var(--surface); border: 1px solid var(--border);
               border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem; }}
     .triad h2 {{ font-size: 1rem; margin-bottom: 1rem; color: var(--accent); }}
-    .triad-grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }}
+    .triad-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1rem; }}
     .triad-item {{ background: #273548; border-radius: 8px; padding: 1rem; }}
     .triad-item h3 {{ font-size: 0.85rem; margin-bottom: 0.4rem; }}
     .triad-item p {{ font-size: 0.78rem; color: var(--muted); line-height: 1.5; }}
@@ -256,11 +300,12 @@ class EvaluationReport:
   </style>
 </head>
 <body>
-  <h1>🔬 RAG Triad Evaluation Report</h1>
+  <h1>🔬 RAG Evaluation Report</h1>
   <div class="subtitle">AI Startup Funding &amp; Investment Intelligence Assistant — DS205.3</div>
   <div class="meta">Evaluated: {self.evaluated_at} &nbsp;|&nbsp; Questions: {self.total_questions}</div>
 
   <!-- Summary Cards -->
+  <div class="section-header">📊 RAG Triad Scores</div>
   <div class="cards">
     <div class="card">
       <div class="card-label">Avg RAG Score</div>
@@ -279,14 +324,38 @@ class EvaluationReport:
       <div class="card-value {'green' if self.avg_answer_relevance >= 0.8 else 'amber' if self.avg_answer_relevance >= 0.6 else 'red'}">{self.avg_answer_relevance:.0%}</div>
     </div>
     <div class="card">
+      <div class="card-label">Pass Rate (≥75%)</div>
+      <div class="card-value {'green' if self.pass_rate >= 0.8 else 'amber' if self.pass_rate >= 0.6 else 'red'}">{self.pass_rate:.0%}</div>
+    </div>
+  </div>
+
+  <div class="section-header">📏 Extended Metrics (Deterministic)</div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-label">Avg Precision</div>
+      <div class="card-value {'green' if self.avg_precision >= 0.8 else 'amber' if self.avg_precision >= 0.6 else 'red'}">{self.avg_precision:.0%}</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avg Recall</div>
+      <div class="card-value {'green' if self.avg_recall >= 0.8 else 'amber' if self.avg_recall >= 0.6 else 'red'}">{self.avg_recall:.0%}</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avg F1 Score</div>
+      <div class="card-value {'green' if self.avg_f1_score >= 0.8 else 'amber' if self.avg_f1_score >= 0.6 else 'red'}">{self.avg_f1_score:.0%}</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avg Cosine Similarity</div>
+      <div class="card-value {'green' if self.avg_cosine_similarity >= 0.8 else 'amber' if self.avg_cosine_similarity >= 0.6 else 'red'}">{self.avg_cosine_similarity:.0%}</div>
+    </div>
+    <div class="card">
       <div class="card-label">Total Questions</div>
       <div class="card-value" style="color:var(--accent)">{self.total_questions}</div>
     </div>
   </div>
 
-  <!-- RAG Triad Explanation -->
+  <!-- Metrics Explanation -->
   <div class="triad">
-    <h2>📐 The RAG Triad (TruEra Framework)</h2>
+    <h2>📐 Evaluation Methodology</h2>
     <div class="triad-grid">
       <div class="triad-item">
         <h3>1. Context Relevance</h3>
@@ -299,6 +368,22 @@ class EvaluationReport:
       <div class="triad-item">
         <h3>3. Answer Relevance</h3>
         <p>Does the answer directly address the question asked? Detects off-topic or evasive responses even when context was good.</p>
+      </div>
+      <div class="triad-item">
+        <h3>4. Keyword Precision</h3>
+        <p>Of the expected keywords in the ground truth, what fraction were found in the system's answer? Measures answer specificity.</p>
+      </div>
+      <div class="triad-item">
+        <h3>5. Keyword Recall</h3>
+        <p>What proportion of the expected ground-truth keywords were successfully reproduced in the system answer? Measures completeness.</p>
+      </div>
+      <div class="triad-item">
+        <h3>6. F1 Score</h3>
+        <p>Harmonic mean of Precision and Recall. Balances the trade-off between keyword coverage and specificity in a single number.</p>
+      </div>
+      <div class="triad-item">
+        <h3>7. Cosine Similarity</h3>
+        <p>Semantic similarity between the ground-truth answer and system answer, computed using the same embedding model (all-MiniLM-L6-v2) as the retrieval pipeline.</p>
       </div>
     </div>
   </div>
@@ -317,10 +402,14 @@ class EvaluationReport:
         <tr>
           <th>ID</th>
           <th>Question</th>
-          <th>Context Rel.</th>
-          <th>Faithfulness</th>
+          <th>Ctx Rel.</th>
+          <th>Faith.</th>
           <th>Ans. Rel.</th>
           <th>RAG Score</th>
+          <th>Precision</th>
+          <th>Recall</th>
+          <th>F1</th>
+          <th>Cos. Sim.</th>
           <th>Judge Reasoning</th>
         </tr>
       </thead>
@@ -331,7 +420,7 @@ class EvaluationReport:
   </div>
 
   <footer>
-    DS205.3 – Data Science with Python &nbsp;|&nbsp; LLM-as-Judge evaluation via Groq (Llama 3) &nbsp;|&nbsp; RAG Triad methodology
+    DS205.3 – Data Science with Python &nbsp;|&nbsp; LLM-as-Judge evaluation via Groq (Llama 3) &nbsp;|&nbsp; RAG Triad + Precision/Recall/F1/Cosine Similarity
   </footer>
 </body>
 </html>"""
@@ -339,6 +428,61 @@ class EvaluationReport:
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(html)
         logger.info("HTML evaluation report saved to %s", output_path)
+
+
+# ── Keyword Metrics ────────────────────────────────────────────────────────────
+
+def compute_keyword_metrics(
+    system_answer: str,
+    expected_keywords: List[str],
+) -> tuple[float, float, float]:
+    """
+    Compute keyword-based Precision, Recall, and F1 Score.
+
+    Precision = matched / total_expected  (how many expected keywords appear?)
+    Recall    = matched / total_expected  (same denominator for keyword matching)
+    F1        = 2 * P * R / (P + R)
+
+    For keyword matching, precision and recall use the same base metric
+    (fraction of expected keywords found in the answer), since we measure
+    against a curated expected-keyword list, not free-form extraction.
+    In practice this means P == R for strict keyword matching, but we
+    differentiate them by also penalising precision if the answer is overly
+    verbose (word-count ratio).
+
+    Args:
+        system_answer:     The system's generated answer text.
+        expected_keywords: List of keywords expected to appear in the answer.
+
+    Returns:
+        Tuple of (precision, recall, f1_score), each in [0.0, 1.0].
+    """
+    if not expected_keywords:
+        return 1.0, 1.0, 1.0   # No keywords to match = trivially correct
+
+    answer_lower = system_answer.lower()
+    matched = sum(1 for kw in expected_keywords if kw.lower() in answer_lower)
+
+    recall = matched / len(expected_keywords)
+
+    # Precision: penalise verbose answers by factoring in the ratio of
+    # matched keywords to the total word count, scaled to be meaningful.
+    # A concise, keyword-dense answer scores higher on precision.
+    answer_word_count = max(len(answer_lower.split()), 1)
+    keyword_density = matched / answer_word_count
+    # Normalise: ideal keyword density ≈ keywords/50-words, cap at 1.0
+    ideal_density = len(expected_keywords) / 50.0
+    precision_density = min(keyword_density / ideal_density, 1.0) if ideal_density > 0 else 1.0
+
+    # Blend: 70% keyword coverage + 30% density bonus
+    precision = 0.7 * recall + 0.3 * precision_density
+
+    if precision + recall == 0:
+        f1 = 0.0
+    else:
+        f1 = 2 * precision * recall / (precision + recall)
+
+    return round(precision, 4), round(recall, 4), round(f1, 4)
 
 
 # ── Judge Prompt ───────────────────────────────────────────────────────────────
@@ -396,11 +540,13 @@ Respond ONLY with this exact JSON (no markdown, no extra text):
 
 class Evaluator:
     """
-    LLM-as-judge evaluator implementing the full RAG Triad.
+    LLM-as-judge evaluator implementing the full RAG Triad plus
+    extended keyword and semantic similarity metrics.
 
     Loads ground-truth QA pairs, runs each question through the RAG agent,
     then scores each response across Context Relevance, Faithfulness, and
-    Answer Relevance using Groq as an impartial judge.
+    Answer Relevance using Groq as an impartial judge. Additionally computes
+    deterministic keyword Precision/Recall/F1 and cosine similarity.
     """
 
     def __init__(self, settings: Settings) -> None:
@@ -413,6 +559,43 @@ class Evaluator:
         """
         self._settings = settings
         self._client = groq.Groq(api_key=settings.groq_api_key)
+        self._embedder = None   # Lazy-loaded for cosine similarity
+
+    def _get_embedder(self):
+        """Lazy-load the embedder for cosine similarity computation."""
+        if self._embedder is None:
+            from ..vectorstore.embedder import LocalEmbedder
+            self._embedder = LocalEmbedder(self._settings)
+        return self._embedder
+
+    def compute_cosine_similarity(
+        self, text_a: str, text_b: str
+    ) -> float:
+        """
+        Compute cosine similarity between two texts using the project's
+        embedding model (all-MiniLM-L6-v2).
+
+        Args:
+            text_a: First text (typically the ground-truth answer).
+            text_b: Second text (typically the system-generated answer).
+
+        Returns:
+            Cosine similarity in [0.0, 1.0].
+        """
+        embedder = self._get_embedder()
+        vec_a = np.array(embedder.embed_query(text_a))
+        vec_b = np.array(embedder.embed_query(text_b))
+
+        dot_product = np.dot(vec_a, vec_b)
+        norm_a = np.linalg.norm(vec_a)
+        norm_b = np.linalg.norm(vec_b)
+
+        if norm_a == 0 or norm_b == 0:
+            return 0.0
+
+        similarity = float(dot_product / (norm_a * norm_b))
+        # Clamp to [0, 1] — cosine similarity can be negative for orthogonal vectors
+        return max(0.0, min(1.0, similarity))
 
     # ── public ────────────────────────────────────────────────────────────────
 
@@ -441,8 +624,12 @@ class Evaluator:
         retrieved_context: str = "",
         retrieved_sources: Optional[List[str]] = None,
         question_id: str = "q0",
+        expected_keywords: Optional[List[str]] = None,
     ) -> EvaluationRecord:
-        """Score a single system answer across the full RAG Triad."""
+        """
+        Score a single system answer across the full RAG Triad plus
+        keyword-based precision/recall/F1 and cosine similarity.
+        """
         prompt = JUDGE_PROMPT.format(
             question=question,
             retrieved_context=retrieved_context or "(no context provided)",
@@ -471,6 +658,14 @@ class Evaluator:
             answer_relevance = 0.0
             reasoning = "Parse error – raw response: " + raw[:120]
 
+        # Compute keyword-based metrics
+        precision, recall, f1 = compute_keyword_metrics(
+            system_answer, expected_keywords or []
+        )
+
+        # Compute cosine similarity
+        cos_sim = self.compute_cosine_similarity(ground_truth, system_answer)
+
         return EvaluationRecord(
             question_id=question_id,
             question=question,
@@ -480,6 +675,10 @@ class Evaluator:
             faithfulness_score=faithfulness,
             answer_relevance_score=answer_relevance,
             judge_reasoning=reasoning,
+            precision=precision,
+            recall=recall,
+            f1_score=f1,
+            cosine_similarity=round(cos_sim, 4),
             retrieved_sources=retrieved_sources or [],
         )
 
@@ -514,6 +713,7 @@ class Evaluator:
                         retrieved_context=result.trace.context_text,
                         retrieved_sources=sources,
                         question_id=item.question_id,
+                        expected_keywords=item.expected_keywords,
                     )
                     records.append(record)
                     print(
@@ -521,7 +721,9 @@ class Evaluator:
                         f"CtxRel={record.context_relevance_score:.2f} | "
                         f"Faith={record.faithfulness_score:.2f} | "
                         f"AnsRel={record.answer_relevance_score:.2f} | "
-                        f"RAG={record.rag_score:.2f}"
+                        f"RAG={record.rag_score:.2f} | "
+                        f"P={record.precision:.2f} R={record.recall:.2f} "
+                        f"F1={record.f1_score:.2f} CosSim={record.cosine_similarity:.2f}"
                     )
                     # Proactively sleep to avoid Groq rate limits on free tier
                     time.sleep(6)
@@ -535,10 +737,15 @@ class Evaluator:
                     else:
                         raise e
 
-        avg_ctx  = sum(r.context_relevance_score for r in records) / len(records) if records else 0.0
-        avg_fth  = sum(r.faithfulness_score       for r in records) / len(records) if records else 0.0
-        avg_ans  = sum(r.answer_relevance_score   for r in records) / len(records) if records else 0.0
-        avg_rag  = sum(r.rag_score                for r in records) / len(records) if records else 0.0
+        n = len(records) if records else 1
+        avg_ctx  = sum(r.context_relevance_score for r in records) / n
+        avg_fth  = sum(r.faithfulness_score       for r in records) / n
+        avg_ans  = sum(r.answer_relevance_score   for r in records) / n
+        avg_rag  = sum(r.rag_score                for r in records) / n
+        avg_p    = sum(r.precision                for r in records) / n
+        avg_r    = sum(r.recall                   for r in records) / n
+        avg_f1   = sum(r.f1_score                 for r in records) / n
+        avg_cos  = sum(r.cosine_similarity        for r in records) / n
 
         report = EvaluationReport(
             records=records,
@@ -547,6 +754,10 @@ class Evaluator:
             avg_answer_relevance=avg_ans,
             avg_rag_score=avg_rag,
             total_questions=len(records),
+            avg_precision=avg_p,
+            avg_recall=avg_r,
+            avg_f1_score=avg_f1,
+            avg_cosine_similarity=avg_cos,
         )
 
         # ── Persist JSON ──────────────────────────────────────────────────────
@@ -561,3 +772,5 @@ class Evaluator:
         report.generate_html_report(out_html)
 
         return report
+
+# Ensure the vector store is populated before running full dataset evaluations to avoid zero-hit errors.

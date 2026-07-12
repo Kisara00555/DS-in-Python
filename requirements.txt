@@ -21,3 +21,7 @@ python-dotenv>=1.0.0
 fastapi>=0.110.0
 uvicorn>=0.29.0
 python-multipart>=0.0.9
+
+# ── Evaluation Charts & Metrics ───────────────────────────────
+matplotlib>=3.8.0
+numpy>=1.24.0
