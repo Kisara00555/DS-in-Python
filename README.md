@@ -94,7 +94,7 @@ data/
 ├── pdfs/                        # ← PUT YOUR PDFs HERE
 ├── vector_store/                # ChromaDB files (auto-created)
 └── evaluation/
-    ├── ground_truth.json        # 15 QA pairs
+    ├── ground_truth.json        # 12 QA pairs
     ├── results.json             # Evaluation output (auto-created)
     └── report.html              # Visual HTML report (auto-created)
 

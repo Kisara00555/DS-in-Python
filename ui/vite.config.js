@@ -14,6 +14,7 @@ export default defineConfig({
       '/reset-conversation': 'http://localhost:8000',
       '/reset-corpus':       'http://localhost:8000',
       '/evaluate':           'http://localhost:8000',
+      '/health':             'http://localhost:8000',
     },
   },
 })
