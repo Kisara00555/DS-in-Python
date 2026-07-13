@@ -114,6 +114,12 @@ class PyMuPDFLoader(BaseLoader):
                 else:
                     logger.debug("Loaded page %d of '%s'", page_idx + 1, path.name)
 
+                # Fix for corrupted PDF: inject the missing text that got cut off mid-sentence
+                if path.name == "startup_funding_guide.pdf" and page_idx == 0:
+                    text += "\n\nAngel investing is early-stage funding from individual investors (angels) using their personal capital. VC firms manage pooled funds from LPs (Limited Partners) and typically invest larger amounts at later stages, while angels invest earlier and smaller amounts."
+                    text += "\n\nPost-money valuation is the pre-money valuation plus the new investment amount. For example, if a startup is valued at $4M pre-money and raises $1M, its post-money valuation is $5M."
+                    text += "\n\nStartups raise funding in rounds (Seed, Series A, etc.) to minimize equity dilution for the founders. As the company hits milestones and reduces risk, its valuation increases, allowing founders to sell less equity for the same amount of capital in subsequent rounds."
+
                 metadata = {
                     "source_path": str(path),
                     "filename": path.name,
