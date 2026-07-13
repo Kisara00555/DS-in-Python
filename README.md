@@ -308,14 +308,14 @@ The evaluation runs against **12 domain-specific ground-truth QA pairs** coverin
 
 | Metric | Score |
 |---|---|
-| **Context Relevance** | 69.17% |
-| **Faithfulness** | 68.33% |
-| **Answer Relevance** | 76.67% |
-| **RAG Score (Harmonic Mean)** | **69.44%** |
-| **Pass Rate** | **66.67%** |
-| **Precision** | 55.42% |
-| **Recall** | 50.97% |
-| **F1 Score** | 52.96% |
+| **Context Relevance** | 77.50% |
+| **Faithfulness** | 80.83% |
+| **Answer Relevance** | 87.50% |
+| **RAG Score (Harmonic Mean)** | **80.00%** |
+| **Pass Rate** | **83.33%** |
+| **Precision** | 50.39% |
+| **Recall** | 42.36% |
+| **F1 Score** | 45.63% |
 
 Run: `python evaluate.py`
 
