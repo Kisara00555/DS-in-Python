@@ -301,8 +301,21 @@ The evaluation runs against **12 domain-specific ground-truth QA pairs** coverin
 
 | File | Contents |
 |---|---|
-| `data/evaluation/results.json` | Machine-readable scores for all 15 QA pairs |
+| `data/evaluation/results.json` | Machine-readable scores for all 12 QA pairs |
 | `data/evaluation/report.html` | Visual HTML report with colour-coded score badges |
+
+### Latest Evaluation Results
+
+| Metric | Score |
+|---|---|
+| **Context Relevance** | 69.17% |
+| **Faithfulness** | 68.33% |
+| **Answer Relevance** | 76.67% |
+| **RAG Score (Harmonic Mean)** | **69.44%** |
+| **Pass Rate** | **66.67%** |
+| **Precision** | 55.42% |
+| **Recall** | 50.97% |
+| **F1 Score** | 52.96% |
 
 Run: `python evaluate.py`
 
