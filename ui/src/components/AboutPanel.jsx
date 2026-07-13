@@ -66,7 +66,7 @@ export default function AboutPanel() {
         <div className="about-stack animate-fade-in-up">
           {[
             { label: "PDF Loader", value: "PyMuPDF" },
-            { label: "Chunking", value: "Sliding Window (800/150)" },
+            { label: "Chunking", value: "Sliding Window (1200/300)" },
             { label: "Embeddings", value: "all-MiniLM-L6-v2 (local)" },
             { label: "Vector Store", value: "ChromaDB (persistent)" },
             { label: "LLM", value: "Llama 3.1 8B" },
