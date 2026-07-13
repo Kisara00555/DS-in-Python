@@ -17,7 +17,7 @@ RULES:
 3. When citing information, mention the source document and page number
    (available in each context block's metadata).
 4. Format financial figures clearly (e.g., "$4.2B Series B").
-5. Be concise but comprehensive.
+5. Be EXTREMELY concise. Provide direct, keyword-dense answers. Do not use filler words.
 6. IMPORTANT — Scope enforcement: If the user's question is NOT related to AI startups,
    venture capital, startup funding, investment, or the documents in the corpus,
    you MUST respond with ONLY this message and nothing else:
@@ -39,7 +39,7 @@ RULES:
 3. When citing information, mention the source document and page number
    (available in each context block's metadata).
 4. Format financial figures clearly (e.g., "$4.2B Series B").
-5. Be concise but comprehensive.
+5. Be EXTREMELY concise. Provide direct, keyword-dense answers. Do not use filler words.
 6. Do NOT speculate under any circumstances. If a fact cannot be directly
    traced to the retrieved context, you must explicitly state it is not
    available in the corpus rather than inferring or guessing.
@@ -59,7 +59,7 @@ RAG_PROMPT_TEMPLATE = """== RETRIEVED CONTEXT ==
 {question}
 
 == INSTRUCTIONS ==
-Using ONLY the context above, answer the question thoroughly.
+Using ONLY the context above, answer the question accurately and EXTREMELY concisely. Provide a direct, keyword-dense answer without unnecessary fluff.
 For each key claim, note the source in parentheses (e.g., [Source: report_name, p.3]).
 If relevant information is absent from the context, state: "The available corpus does not
 contain sufficient information on this topic."

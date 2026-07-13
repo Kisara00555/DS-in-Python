@@ -40,10 +40,10 @@ class Settings:
 
     # ── Chunking ─────────────────────────────────────────────────────────────
     chunk_size: int = field(
-        default_factory=lambda: int(os.getenv("CHUNK_SIZE", "800"))
+        default_factory=lambda: int(os.getenv("CHUNK_SIZE", "1200"))
     )
     chunk_overlap: int = field(
-        default_factory=lambda: int(os.getenv("CHUNK_OVERLAP", "150"))
+        default_factory=lambda: int(os.getenv("CHUNK_OVERLAP", "300"))
     )
 
     # ── Vector store ─────────────────────────────────────────────────────────
@@ -59,7 +59,7 @@ class Settings:
     )
 
     # ── Retrieval ─────────────────────────────────────────────────────────────
-    top_k: int = field(default_factory=lambda: int(os.getenv("TOP_K", "5")))
+    top_k: int = field(default_factory=lambda: int(os.getenv("TOP_K", "10")))
 
     # ── Data paths ───────────────────────────────────────────────────────────
     data_dir: Path = field(
