@@ -2,9 +2,9 @@ import "./AboutPanel.css";
 
 const TEAM = [
   { name: "Kisara", role: "Member 1 – Data Ingestion & Chunking Pipeline" },
-  { name: "Dilusha", role: "Member 2 – RAG Agent & FastAPI Backend" },
+  { name: "Tharusha", role: "Member 2 – RAG Agent & FastAPI Backend" },
   { name: "Savindi", role: "Member 3 – Evaluation Framework & Ground Truth" },
-  { name: "Tharusha", role: "Member 4 – React UI, Report & Documentation" },
+  { name: "Dilusha", role: "Member 4 – React UI, Report & Documentation" },
 ];
 
 export default function AboutPanel() {

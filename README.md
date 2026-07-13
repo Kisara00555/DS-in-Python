@@ -320,9 +320,9 @@ Run: `python evaluate.py`
 
 DS205.3 Group – Faculty of Computing
 - Kisara – Data Ingestion & Chunking Pipeline
-- Dilusha – RAG Agent & FastAPI Backend
+- Tharusha – RAG Agent & FastAPI Backend
 - Savindi – Evaluation Framework, Ground Truth, & 5-Min Video Demonstration
-- Tharusha – React UI, Final Technical Report, & Documentation
+- Dilusha – React UI, Final Technical Report, & Documentation
 
 ## AI Usage Disclosure
 In accordance with coursework guidelines, we acknowledge the use of AI (Groq (Llama 3.1)) during this project as a pair-programming assistant.

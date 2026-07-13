@@ -31,22 +31,24 @@ export default function EvalPanel({ status }) {
   return (
     <div className="eval-panel">
       <div className="eval-content">
-        <h2 className="panel-heading">📊 RAG Triad Evaluation</h2>
+        <h2 className="panel-heading">📊 RAG Evaluation Dashboard</h2>
         <p className="panel-sub">
-          Scores the system across all three dimensions of the RAG Triad against 15 ground-truth QA pairs.
+          Scores the system across 7 dimensions: RAG Triad (LLM-as-Judge) + Precision, Recall, F1 Score & Cosine Similarity against {s?.total_questions ?? 12} ground-truth QA pairs.
         </p>
 
-        {/* RAG Triad info card */}
+        {/* Methodology info card */}
         <div className="eval-info-card glass">
           <div className="eval-info-icon">🔬</div>
           <div>
-            <strong>The RAG Triad (TruEra Framework)</strong>
+            <strong>Evaluation Methodology</strong>
             <p>
-              Three orthogonal metrics that together capture full RAG quality:
-              {" "}<span className="text-blue">Context Relevance</span> (were the retrieved chunks useful?),
-              {" "}<span className="text-cyan">Faithfulness</span> (is the answer grounded in context — no hallucinations?), and
-              {" "}<span className="text-purple">Answer Relevance</span> (does the answer address the question?).
-              The aggregate <strong>RAG Score</strong> is the harmonic mean of all three.
+              <span className="text-blue">Context Relevance</span> (were the retrieved chunks useful?),{" "}
+              <span className="text-cyan">Faithfulness</span> (is the answer grounded — no hallucinations?),{" "}
+              <span className="text-purple">Answer Relevance</span> (does it address the question?),{" "}
+              plus deterministic metrics:{" "}
+              <span className="text-green">Precision</span> &amp; <span className="text-green">Recall</span> (keyword coverage),{" "}
+              <span className="text-amber">F1 Score</span> (harmonic mean), and{" "}
+              <span className="text-pink">Cosine Similarity</span> (semantic similarity via all-MiniLM-L6-v2).
             </p>
           </div>
         </div>
@@ -59,7 +61,7 @@ export default function EvalPanel({ status }) {
             disabled={loading || !status?.ready}
           >
             {loading ? (
-              <><span className="spinner" /> Running RAG Triad evaluation… (2–3 min)</>
+              <><span className="spinner" /> Running full evaluation… (2–5 min)</>
             ) : (
               "▶ Run Full Evaluation"
             )}
@@ -94,7 +96,9 @@ export default function EvalPanel({ status }) {
 
         {report && (
           <div className="eval-results animate-fade-in-up">
-            {/* Summary metric cards */}
+
+            {/* RAG Triad metric cards */}
+            <div className="eval-section-label">📐 RAG Triad (LLM-as-Judge)</div>
             <div className="eval-metrics">
               <div className="metric-card">
                 <div className={`metric-value ${scoreColor(s.avg_rag_score)}`}>
@@ -133,6 +137,56 @@ export default function EvalPanel({ status }) {
                 </div>
               </div>
               <div className="metric-card">
+                <div className={`metric-value ${scoreColor(s.pass_rate)}`}>
+                  {(s.pass_rate * 100).toFixed(1)}%
+                </div>
+                <div className="metric-label">Pass Rate (≥75%)</div>
+                <div className="metric-bar">
+                  <div className="metric-fill rag" style={{ width: `${s.pass_rate * 100}%` }} />
+                </div>
+              </div>
+            </div>
+
+            {/* Extended metrics cards */}
+            <div className="eval-section-label">📏 Extended Metrics (Deterministic)</div>
+            <div className="eval-metrics">
+              <div className="metric-card">
+                <div className={`metric-value ${scoreColor(s.avg_precision)}`}>
+                  {(s.avg_precision * 100).toFixed(1)}%
+                </div>
+                <div className="metric-label">Precision</div>
+                <div className="metric-bar">
+                  <div className="metric-fill prec" style={{ width: `${s.avg_precision * 100}%` }} />
+                </div>
+              </div>
+              <div className="metric-card">
+                <div className={`metric-value ${scoreColor(s.avg_recall)}`}>
+                  {(s.avg_recall * 100).toFixed(1)}%
+                </div>
+                <div className="metric-label">Recall</div>
+                <div className="metric-bar">
+                  <div className="metric-fill recall" style={{ width: `${s.avg_recall * 100}%` }} />
+                </div>
+              </div>
+              <div className="metric-card">
+                <div className={`metric-value ${scoreColor(s.avg_f1_score)}`}>
+                  {(s.avg_f1_score * 100).toFixed(1)}%
+                </div>
+                <div className="metric-label">F1 Score</div>
+                <div className="metric-bar">
+                  <div className="metric-fill f1" style={{ width: `${s.avg_f1_score * 100}%` }} />
+                </div>
+              </div>
+              <div className="metric-card">
+                <div className={`metric-value ${scoreColor(s.avg_cosine_similarity)}`}>
+                  {(s.avg_cosine_similarity * 100).toFixed(1)}%
+                </div>
+                <div className="metric-label">Cosine Similarity</div>
+                <div className="metric-bar">
+                  <div className="metric-fill cossim" style={{ width: `${s.avg_cosine_similarity * 100}%` }} />
+                </div>
+              </div>
+              <div className="metric-card">
                 <div className="metric-value gradient-text">
                   {s.total_questions}
                 </div>
@@ -150,7 +204,11 @@ export default function EvalPanel({ status }) {
                     <th>Ctx Rel</th>
                     <th>Faithful</th>
                     <th>Ans Rel</th>
-                    <th>RAG Score</th>
+                    <th>RAG</th>
+                    <th>Prec</th>
+                    <th>Recall</th>
+                    <th>F1</th>
+                    <th>Cos Sim</th>
                     <th>Reasoning</th>
                   </tr>
                 </thead>
@@ -163,6 +221,10 @@ export default function EvalPanel({ status }) {
                       <td><ScoreCell val={r.faithfulness_score} /></td>
                       <td><ScoreCell val={r.answer_relevance_score} /></td>
                       <td><ScoreCell val={r.rag_score} bold /></td>
+                      <td><ScoreCell val={r.precision} /></td>
+                      <td><ScoreCell val={r.recall} /></td>
+                      <td><ScoreCell val={r.f1_score} /></td>
+                      <td><ScoreCell val={r.cosine_similarity} /></td>
                       <td className="reasoning-cell">{r.judge_reasoning}</td>
                     </tr>
                   ))}
@@ -171,7 +233,7 @@ export default function EvalPanel({ status }) {
             </div>
 
             <div className="eval-footer">
-              Evaluated at {report.evaluated_at} · LLM-as-Judge via Groq (Llama 3) · RAG Triad methodology
+              Evaluated at {report.evaluated_at} · LLM-as-Judge via Groq (Llama 3) · RAG Triad + Precision/Recall/F1/Cosine Similarity
             </div>
           </div>
         )}
@@ -192,5 +254,6 @@ function ScoreCell({ val, bold }) {
 
 /**
  * EvalPanel:
- * Triggers RAG triad evaluation pipelines and renders the resulting scores and reasoning.
+ * Triggers RAG evaluation pipelines and renders the resulting scores and reasoning,
+ * including RAG Triad + Precision, Recall, F1 Score, and Cosine Similarity metrics.
  */
