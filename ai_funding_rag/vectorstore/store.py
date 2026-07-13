@@ -51,7 +51,7 @@ class BaseVectorStore(ABC):
 
     @abstractmethod
     def search(self, query: str, embedder: BaseEmbedder,
-               top_k: int = 5) -> List[RetrievedChunk]:
+               top_k: int = 10) -> List[RetrievedChunk]:
         """Return top-k semantically similar chunks for query."""
 
     @abstractmethod
@@ -113,7 +113,7 @@ class ChromaVectorStore(BaseVectorStore):
         return len(chunks)
 
     def search(self, query: str, embedder: BaseEmbedder,
-               top_k: int = 5) -> List[RetrievedChunk]:
+               top_k: int = 10) -> List[RetrievedChunk]:
         query_vec = embedder.embed_query(query)
         results = self._collection.query(
             query_embeddings=[query_vec],

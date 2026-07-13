@@ -23,7 +23,7 @@ data/pdfs/
              ▼
 ┌─────────────────────────┐
 │  SlidingWindowChunker   │  ← ingestion/chunker.py
-│  (size=800, overlap=150)│
+│  (size=1200, overlap=300)│
 └────────────┬────────────┘
              │ TextChunk[]
              ▼
@@ -269,7 +269,7 @@ Opens `data/evaluation/report.html` in your browser for a visual results table.
 | Decision | Choice | Rationale |
 |---|---|---|
 | PDF Extraction | PyMuPDF | Fastest, best fidelity, handles tables |
-| Chunking | Sliding window (800/150) | Balances context vs. retrieval precision |
+| Chunking | Sliding window (1200/300) | Balances context vs. retrieval precision |
 | Embedding Model | all-MiniLM-L6-v2 (local) | No API quota, fast, offline |
 | Vector Store | ChromaDB (persistent) | Local, no cloud dependency, HNSW index |
 | LLM | Llama 3.1 8B | Low latency, strong instruction following |

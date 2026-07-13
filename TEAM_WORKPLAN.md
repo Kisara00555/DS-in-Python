@@ -55,7 +55,7 @@ cd ..
 ### What you need to understand
 
 1. **`PyMuPDFLoader`** - reads each PDF page by page. Falls back to block-mode for scanned PDFs.
-2. **`SlidingWindowChunker`** - splits text using a sliding window (800 chars, 150 overlap). It is sentence-aware, it won't cut mid-sentence.
+2. **`SlidingWindowChunker`** - splits text using a sliding window (1200 chars, 300 overlap). It is sentence-aware, it won't cut mid-sentence.
 3. **`BaseLoader` and `BaseChunker`** - abstract base classes. Your code implements them. Do NOT delete the ABCs.
 
 ### 10-Day Commit Plan

@@ -42,11 +42,11 @@ class SlidingWindowChunker(BaseChunker):
     Uses character-level splitting with sentence boundary awareness.
 
     Strategy rationale:
-      - chunk_size=800 chars  → fits ~200 tokens, ideal for embedding models
-      - overlap=150 chars     → preserves cross-boundary context for retrieval
+      - chunk_size=1200 chars  → fits ~300 tokens, ideal for embedding models
+      - overlap=300 chars     → preserves cross-boundary context for retrieval
     """
 
-    def __init__(self, chunk_size: int = 800, chunk_overlap: int = 150) -> None:
+    def __init__(self, chunk_size: int = 1200, chunk_overlap: int = 300) -> None:
         """
         Initialise the chunker with sliding window parameters.
 
