@@ -90,6 +90,17 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
     } catch {}
   };
 
+  const handleDownload = () => {
+    const chatText = messages.map(m => `[${m.timestamp?.toLocaleString() || new Date().toLocaleString()}] ${m.role.toUpperCase()}:\n${m.content}\n`).join("\n");
+    const blob = new Blob([chatText], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "chat-history.txt";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const notReady = !status?.ready;
 
   return (
@@ -167,9 +178,14 @@ export default function ChatPanel({ messages, setMessages, loading, setLoading, 
               </select>
             </div>
           </div>
-          <button id="btn-reset-conversation" className="btn btn-ghost" onClick={handleReset} title="Clear history">
-            🗑️ Clear
-          </button>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button className="btn btn-ghost" onClick={handleDownload} title="Download history">
+              📥 Download
+            </button>
+            <button id="btn-reset-conversation" className="btn btn-ghost" onClick={handleReset} title="Clear history">
+              🗑️ Clear
+            </button>
+          </div>
         </div>
 
         <div className="chat-input-box">
